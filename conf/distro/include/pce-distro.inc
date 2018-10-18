@@ -1,3 +1,8 @@
+DISTRO = "pce"
+DISTRO_NAME = "pce"
+SDK_VENDOR = "-pcesdk"
+TARGET_VENDOR = "-pce"
+
 DISTRO_VERSION = "0.1"
 DISTRO_CODENAME = "sumo"
 SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"

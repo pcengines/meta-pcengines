@@ -45,6 +45,14 @@ MACHINE_EXTRA_RRECOMMENDS += " \
     util-linux-blkid \
 "
 
+# QEMU does not support some of the enhanced instructions available
+# on the AMD chips which causes some build time failures.
+# Such as:
+# NOTE: > Executing update_gio_module_cache intercept ...
+# NOTE: Exit code 132. Output:
+# Illegal instruction (core dumped)
+MACHINE_FEATURES_remove = "qemu-usermode"
+
 APPEND_ADDITIONAL ??= ""
 APPEND += "${APPEND_ADDITIONAL}"
 

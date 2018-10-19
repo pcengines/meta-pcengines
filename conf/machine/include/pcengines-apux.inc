@@ -9,7 +9,6 @@ require conf/multilib.conf
 # Add serial consoles to kernel commandline
 KERNEL_SERIAL_CONSOLE ??= "console=ttyS0,115200n8"
 APPEND += "${KERNEL_SERIAL_CONSOLE}"
-SERIAL_CONSOLES = "115200;ttyS0"
 
 MACHINEOVERRIDES =. "amd:amdx86:pcengines-apux:"
 
@@ -25,11 +24,7 @@ PREFERRED_VERSION_linux-yocto = "4.14%"
 
 MACHINE_FEATURES += " \
     efi \
-    keyboard \
     rtc \
-    serial \
-    usbgadget \
-    usbhost \
     pcbios \
     vfat \
     tpm \
@@ -56,6 +51,6 @@ MACHINE_FEATURES_remove = "qemu-usermode"
 APPEND_ADDITIONAL ??= ""
 APPEND += "${APPEND_ADDITIONAL}"
 
-IMAGE_FSTYPES += "hddimg ext4"
+IMAGE_FSTYPES += "ext4"
 
 IMAGE_OVERHEAD_FACTOR = "1.1"

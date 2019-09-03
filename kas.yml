@@ -1,0 +1,64 @@
+header:
+  version: 8
+
+distro: pce-xen
+machine: pcengines-apu2
+target: core-image-full-cmdline
+
+repos:
+  meta-pcengines:
+
+  poky:
+    url: https://git.yoctoproject.org/git/poky
+    refspec: 01b8a8b54bc569e5ef3f5e6fc6abcee365ab25d9
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp:
+
+  meta-openembedded:
+    url: http://git.openembedded.org/meta-openembedded
+    refspec: 0afee3eacfd18a9962013830028f9e54b4973657
+    layers:
+      meta-oe:
+      meta-networking:
+      meta-filesystems:
+      meta-python:
+
+  meta-virtualization:
+    url: https://git.yoctoproject.org/git/meta-virtualization
+    refspec: 2c6f451aa2b954c0cab2052d4f4635618050f648
+
+  meta-security:
+    url: https://git.yoctoproject.org/git/meta-security
+    refspec: 4f7be0d252f68d8e8d442a7ed8c6e8a852872d28
+    layers:
+      meta-tpm:
+
+bblayers_conf_header:
+  standard: |
+    POKY_BBLAYERS_CONF_VERSION = "2"
+    BBPATH = "${TOPDIR}"
+    BBFILES ?= ""
+    LICENSE_FLAGS_WHITELIST = "commercial"
+local_conf_header:
+  standard: |
+    CONF_VERSION = "1"
+    PACKAGE_CLASSES = "package_rpm"
+    SDKMACHINE = "x86_64"
+    USER_CLASSES = "buildstats image-mklibs image-prelink"
+    PATCHRESOLVE = "noop"
+  debug-tweaks: |
+    EXTRA_IMAGE_FEATURES = "debug-tweaks"
+  diskmon: |
+    BB_DISKMON_DIRS = "\
+        STOPTASKS,${TMPDIR},1G,100K \
+        STOPTASKS,${DL_DIR},1G,100K \
+        STOPTASKS,${SSTATE_DIR},1G,100K \
+        STOPTASKS,/tmp,100M,100K \
+        ABORT,${TMPDIR},100M,1K \
+        ABORT,${DL_DIR},100M,1K \
+        ABORT,${SSTATE_DIR},100M,1K \
+        ABORT,/tmp,10M,1K"
+    oe-layer-priority: |
+      BBFILE_PRIORITY_openembedded-layer = "4"

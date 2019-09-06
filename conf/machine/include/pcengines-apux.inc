@@ -24,7 +24,6 @@ XSERVER ?= "${XSERVER_X86_BASE} \
 PREFERRED_VERSION_linux-yocto = "4.19%"
 
 MACHINE_FEATURES += " \
-    efi \
     rtc \
     pcbios \
     vfat \

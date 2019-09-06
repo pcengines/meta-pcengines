@@ -1,4 +1,4 @@
-require core-image-full-cmdline.bb
+require recipes-extended/images/core-image-full-cmdline.bb
 
 IMAGE_INSTALL_append = " \
   xen-base \

@@ -7,6 +7,7 @@ MULTILIBS ?= ""
 require conf/multilib.conf
 
 # Add serial consoles to kernel commandline
+SERIAL_CONSOLES = "115200;ttyUSB0"
 KERNEL_SERIAL_CONSOLE ??= "console=ttyS0,115200n8"
 APPEND += "${KERNEL_SERIAL_CONSOLE}"
 
@@ -20,7 +21,7 @@ XSERVER ?= "${XSERVER_X86_BASE} \
             ${XSERVER_X86_FBDEV} \
            "
 
-PREFERRED_VERSION_linux-yocto = "4.14%"
+PREFERRED_VERSION_linux-yocto = "4.19%"
 
 MACHINE_FEATURES += " \
     efi \

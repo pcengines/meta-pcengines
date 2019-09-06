@@ -7,3 +7,9 @@ an issue or PR with description of your needs / fixes.
 # meta-pcengines
 
 Yocto BSP layer for PC Engines hardware
+
+# Building
+
+```
+SHELL=bash kas-docker --ssh-dir ~/ssh-keys build meta-pcengines/kas.yml
+```

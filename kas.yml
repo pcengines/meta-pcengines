@@ -66,3 +66,5 @@ local_conf_header:
         ABORT,/tmp,10M,1K"
   oe-layer-priority: |
     BBFILE_PRIORITY_openembedded-layer = "4"
+  xen-version: |
+    PREFERRED_VERSION_xen = "4.13%"

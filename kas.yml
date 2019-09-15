@@ -27,13 +27,17 @@ repos:
 
   meta-virtualization:
     url: https://git.yoctoproject.org/git/meta-virtualization
-    refspec: 2c6f451aa2b954c0cab2052d4f4635618050f648
+    refspec: ab382e2453d652181eb7a6fb4dcf201d4b33b94a
 
   meta-security:
     url: https://git.yoctoproject.org/git/meta-security
-    refspec: 4f7be0d252f68d8e8d442a7ed8c6e8a852872d28
+    refspec: 76d3625bcf63aa61e9f8d238842d094c03de6790
     layers:
       meta-tpm:
+
+  meta-selinux:
+    url: https://git.yoctoproject.org/git/meta-selinux
+    refspec: e2185e487b437e811725e8bbe489d5194267a56a
 
 bblayers_conf_header:
   standard: |

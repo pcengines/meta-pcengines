@@ -3,7 +3,7 @@ header:
 
 distro: pce-xen
 machine: pcengines-apu2
-target: core-image-full-cmdline
+target: core-image-xen
 
 repos:
   meta-pcengines:

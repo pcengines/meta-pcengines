@@ -3,7 +3,7 @@ header:
 
 distro: pce-xen
 machine: pcengines-apu2
-target: core-image-xen
+target: xen-image-minimal
 
 repos:
   meta-pcengines:

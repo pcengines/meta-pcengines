@@ -2,12 +2,14 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 require recipes-bsp/grub/grub2.inc
 
+BRANCH = "fix_duplicated_syms"
 SRC_URI_remove = " ${GNU_MIRROR}/grub/grub-${PV}.tar.gz"
-SRC_URI_append = " git://github.com/3mdeb/grub2.git;branch=scratchpad_kh;protocol=https"
+SRC_URI_append = " git://github.com/3mdeb/grub2.git;branch=${BRANCH};protocol=https"
+
 
 S = "${WORKDIR}/git"
 
-SRCREV = "3425b85e83dbea3dffa0f88d4c2051c771ebc033"
+SRCREV = "b724a59276eb0bd6b11f01a2819af84649b38ce5"
 
 PV = "2.0.4-rc1+${SRCREV}"
 

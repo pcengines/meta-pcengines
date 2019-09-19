@@ -10,6 +10,7 @@ IMAGE_INSTALL_append = " \
   grub \
   lvm2 \
   bridge-utils \
+  seabios \
   "
 
 build_syslinux_cfg () {

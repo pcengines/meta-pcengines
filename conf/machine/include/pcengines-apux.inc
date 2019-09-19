@@ -54,3 +54,13 @@ APPEND += "${APPEND_ADDITIONAL}"
 IMAGE_FSTYPES += "ext4"
 
 IMAGE_OVERHEAD_FACTOR = "1.1"
+
+KERNEL_MODULE_AUTOLOAD += " \
+    xen-netback \
+    xen_wdt \
+    xen-gntdev \
+    xen-gntalloc \
+    en-acpi-processor \
+    xen-pciback \
+    xen-blkback \
+"

@@ -7,6 +7,9 @@ IMAGE_INSTALL_append = " \
   libtss2-mu \
   libtss2-tcti-device \
   libtss2-tcti-mssim \
+  grub \
+  lvm2 \
+  bridge-utils \
   "
 
 build_syslinux_cfg () {

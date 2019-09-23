@@ -1,0 +1,36 @@
+From d6551417536d48c34bd1e5fc25bcaae23af4e049 Mon Sep 17 00:00:00 2001
+From: Asiderr <norbert.kaminski@3mdeb.com>
+Date: Mon, 23 Sep 2019 10:51:29 +0200
+Subject: [PATCH 2/2] always enable AMD_IOMMU_DEBUG
+
+Signed-off-by: Asiderr <norbert.kaminski@3mdeb.com>
+---
+ xen/drivers/passthrough/amd/iommu_map.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/xen/drivers/passthrough/amd/iommu_map.c b/xen/drivers/passthrough/amd/iommu_map.c
+index cd6ace1151..eadfe512f2 100644
+--- a/xen/drivers/passthrough/amd/iommu_map.c
++++ b/xen/drivers/passthrough/amd/iommu_map.c
+@@ -329,7 +329,7 @@ static int update_paging_mode(struct domain *d, unsigned long dfn)
+             iommu = find_iommu_for_device(pdev->seg, bdf);
+             if ( !iommu )
+             {
+-                printk(XENLOG_INFO "AMD-Vi: %s Fail to find iommu.\n", __func__); 
++                AMD_IOMMU_DEBUG("%s Fail to find iommu.\n", __func__);
+                 return -ENODEV;
+             }
+ 
+@@ -396,8 +396,7 @@ int amd_iommu_map_page(struct domain *d, dfn_t dfn, mfn_t mfn,
+     if ( iommu_pde_from_dfn(d, dfn_x(dfn), pt_mfn) || (pt_mfn[1] == 0) )
+     {
+         spin_unlock(&hd->arch.mapping_lock);
+-        AMD_IOMMU_DEBUG("Invalid IO pagetable entry dfn = %"PRI_dfn"\n",
+-                        dfn_x(dfn));
++        printk(XENLOG_INFO "AMD-Vi: Invalid IO pagetable entry dfn = %"PRI_dfn"\n", dfn_x(dfn));
+         domain_crash(d);
+         return -EFAULT;
+     }
+-- 
+2.17.1
+

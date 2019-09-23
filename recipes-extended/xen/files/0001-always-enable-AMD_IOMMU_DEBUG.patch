@@ -1,26 +1,26 @@
-From 897f80e62b9eb077306ac8736410e85addde1888 Mon Sep 17 00:00:00 2001
-From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
-Date: Fri, 20 Sep 2019 13:13:45 +0200
+From e886c390c70ef66283caa752fb5553371cba8736 Mon Sep 17 00:00:00 2001
+From: Asiderr <norbert.kaminski@3mdeb.com>
+Date: Mon, 23 Sep 2019 10:01:44 +0200
 Subject: [PATCH] always enable AMD_IOMMU_DEBUG
 
-Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+Signed-off-by: Asiderr <norbert.kaminski@3mdeb.com>
 ---
- xen/include/asm-x86/hvm/svm/amd-iommu-proto.h | 2 +-
+ xen/drivers/passthrough/amd/iommu_map.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/include/asm-x86/hvm/svm/amd-iommu-proto.h b/xen/include/asm-x86/hvm/svm/amd-iommu-proto.h
-index 369177d1df88..9c5fe37886f0 100644
---- a/xen/include/asm-x86/hvm/svm/amd-iommu-proto.h
-+++ b/xen/include/asm-x86/hvm/svm/amd-iommu-proto.h
-@@ -36,7 +36,7 @@ struct acpi_ivrs_hardware;
- #define AMD_IOMMU_DEBUG(fmt, args...) \
-     do  \
-     {   \
--        if ( iommu_debug )  \
-+        if (1)  \
-             printk(XENLOG_INFO "AMD-Vi: " fmt, ## args);    \
-     } while(0)
+diff --git a/xen/drivers/passthrough/amd/iommu_map.c b/xen/drivers/passthrough/amd/iommu_map.c
+index b5e565880e..cd6ace1151 100644
+--- a/xen/drivers/passthrough/amd/iommu_map.c
++++ b/xen/drivers/passthrough/amd/iommu_map.c
+@@ -329,7 +329,7 @@ static int update_paging_mode(struct domain *d, unsigned long dfn)
+             iommu = find_iommu_for_device(pdev->seg, bdf);
+             if ( !iommu )
+             {
+-                AMD_IOMMU_DEBUG("%s Fail to find iommu.\n", __func__);
++                printk(XENLOG_INFO "AMD-Vi: %s Fail to find iommu.\n", __func__); 
+                 return -ENODEV;
+             }
  
 -- 
-2.7.4
+2.17.1
 

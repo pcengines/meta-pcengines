@@ -1,4 +1,5 @@
 IMAGE_INSTALL_append = " \
+  kernel-modules \
   xen-misc \
   tpm2-tools \
   tpm2-abrmd \
@@ -11,6 +12,8 @@ IMAGE_INSTALL_append = " \
   lvm2 \
   bridge-utils \
   seabios \
+  hvm-create \
+  openvswitch \
   "
 
 build_syslinux_cfg () {

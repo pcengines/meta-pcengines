@@ -4,8 +4,8 @@ header:
 distro: pce-xen
 machine: pcengines-apu2
 target:
-  - xen-image-minimal
-  - xen-guest-image-minimal
+  - xen-dom0-image
+  - xen-ndvm-image
 
 repos:
   meta-pcengines:

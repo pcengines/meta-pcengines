@@ -29,6 +29,7 @@ build_syslinux_cfg () {
 	echo "  APPEND /xen.gz dom0_mem=512M ${SYSLINUX_XEN_ARGS} --- /${KERNEL_IMAGETYPE} ${SYSLINUX_KERNEL_ARGS} --- /initrd" >> ${SYSLINUX_CFG}
 }
 
+IMAGE_ROOTFS_EXTRA_SPACE = "524288"
 
 ROOTFS_POSTPROCESS_COMMAND += "rootfs_install_ndvm_image; "
 

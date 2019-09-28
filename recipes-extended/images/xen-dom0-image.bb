@@ -33,7 +33,7 @@ IMAGE_ROOTFS_EXTRA_SPACE = "524288"
 
 ROOTFS_POSTPROCESS_COMMAND += "rootfs_install_ndvm_image; "
 
-do_image[depends] += "xen-ndvm-image:do_build"
+do_rootfs[depends] += "xen-ndvm-image:do_image_complete"
 
 rootfs_install_ndvm_image(){
     install -d ${IMAGE_ROOTFS}/${datadir}/xen-images/

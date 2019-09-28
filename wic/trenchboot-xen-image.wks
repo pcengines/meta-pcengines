@@ -1,0 +1,3 @@
+part /boot --source bootimg-partition --ondisk sda --fstype=vfat --label boot --align 4096 --fixed-size 64M
+part /     --source rootfs --ondisk sda --fstype=ext4 --label rootfs  --align 4096 --fixed-size 6G
+part       --source rootfs --ondisk sda --fstype=ext4 --label lvm --align 4096 --fixed-size 8G

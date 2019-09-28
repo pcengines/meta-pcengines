@@ -5,6 +5,7 @@ SRC_URI_append = " file://0002-always-enable-AMD_IOMMU_DEBUG.patch"
 
 do_deploy_append() {
     if [ -f ${DEPLOYDIR}/xen-${MACHINE}.gz  ]; then
+        rm ${DEPLOYDIR}/xen.gz
         ln -s xen-${MACHINE}.gz ${DEPLOYDIR}/xen.gz
     fi
 }

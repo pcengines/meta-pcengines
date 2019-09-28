@@ -6,10 +6,10 @@ IMAGE_INSTALL_append = " \
   openssh \
   bridge-utils \
   openvswitch \
-  ifupdown \
   kernel-modules \
   iptables \
   wget \
   ethtool \
   iputils-ping \
+  xen-ndvm-networkd-config \
   "

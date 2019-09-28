@@ -39,3 +39,5 @@ rootfs_install_ndvm_image(){
     install -d ${IMAGE_ROOTFS}/${datadir}/xen-images/
     install ${DEPLOY_DIR_IMAGE}/xen-ndvm-image-${MACHINE}.hddimg ${IMAGE_ROOTFS}/${datadir}/xen-images/xen-ndvm-image.hddimg
 }
+
+IMAGE_FSTYPES += "wic.gz wic.bmap"

@@ -17,6 +17,8 @@ IMAGE_INSTALL_append = " \
   hvm-create \
   openvswitch \
   opnsense \
+  dhcp-client \
+  netcat \
   "
 
 build_syslinux_cfg () {

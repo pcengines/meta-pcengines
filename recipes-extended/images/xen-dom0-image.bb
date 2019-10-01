@@ -16,7 +16,6 @@ IMAGE_INSTALL_append = " \
   seabios \
   hvm-create \
   openvswitch \
-  opnsense \
   dhcp-client \
   netcat \
   "

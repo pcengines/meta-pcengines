@@ -25,3 +25,5 @@ do_install() {
 }
 
 FILES_${PN} += "${ROOT_HOME}/hvm-conf/ ${ROOT_HOME}/hvm-create.sh"
+
+RDEPENDS_${PN} += "bash"

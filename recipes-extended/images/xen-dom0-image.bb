@@ -18,6 +18,7 @@ IMAGE_INSTALL_append = " \
   openvswitch \
   dhcp-client \
   netcat \
+  pfsense-preinstalled \
   "
 
 build_syslinux_cfg () {
@@ -43,4 +44,4 @@ rootfs_install_ndvm_image(){
     install ${DEPLOY_DIR_IMAGE}/xen-ndvm-image-${MACHINE}.hddimg ${IMAGE_ROOTFS}/${datadir}/xen-images/xen-ndvm-image-3.hddimg
 }
 
-IMAGE_FSTYPES += "wic.gz wic.bmap"
+IMAGE_FSTYPES = "ext4 wic.gz wic.bmap"

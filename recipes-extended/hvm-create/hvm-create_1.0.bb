@@ -2,21 +2,28 @@ SUMMARY = "HVM create"
 DESCRIPTION = "HVM create"
 HOMEPAGE = ""
 LICENSE = "CLOSED"
-HVM_SH := "${THISDIR}/files/hvm-create.sh"
-HVM_CONFIG := "${THISDIR}/files/xen-guest-minimal.cfg"
-HVM_CONFIG2 := "${THISDIR}/files/xen-guest-minimal2.cfg"
-HVM_CONFIG3 := "${THISDIR}/files/xen-guest-minimal3.cfg"
-OPN_SENSE := "${THISDIR}/files/opn-sense.cfg"
+
+SRC_URI = " \
+  file://ndvm-1.cfg \
+  file://ndvm-2.cfg \
+  file://ndvm-3.cfg \
+  file://opnsense.cfg \
+  file://pfsense.cfg \
+  file://hvm-create.sh \
+"
+
+S = "${WORKDIR}"
 
 do_install() {
-    install -d ${D}${ROOT_HOME}
     install -d ${D}${ROOT_HOME}/hvm-conf
-    install -m  0755 ${HVM_SH} ${D}${ROOT_HOME}
-    install -m  0644 ${HVM_CONFIG} ${D}${ROOT_HOME}/hvm-conf
-    install -m  0644 ${HVM_CONFIG2} ${D}${ROOT_HOME}/hvm-conf
-    install -m  0644 ${HVM_CONFIG3} ${D}${ROOT_HOME}/hvm-conf
-    install -m  0644 ${OPN_SENSE} ${D}${ROOT_HOME}/hvm-conf
+    install -m  0755 ${S}/hvm-create.sh ${D}${ROOT_HOME}
+    install -m  0644 ${S}/ndvm-1.cfg ${D}${ROOT_HOME}/hvm-conf/
+    install -m  0644 ${S}/ndvm-2.cfg ${D}${ROOT_HOME}/hvm-conf/
+    install -m  0644 ${S}/ndvm-3.cfg ${D}${ROOT_HOME}/hvm-conf/
+    install -m  0644 ${S}/opnsense.cfg ${D}${ROOT_HOME}/hvm-conf/
+    install -m  0644 ${S}/pfsense.cfg ${D}${ROOT_HOME}/hvm-conf/
 }
 
-FILES_${PN} += "${ROOT_HOME}/hvm-conf"
-FILES_${PN} += "${ROOT_HOME}"
+FILES_${PN} += "${ROOT_HOME}/hvm-conf/ ${ROOT_HOME}/hvm-create.sh"
+
+RDEPENDS_${PN} += "bash"

@@ -4,8 +4,8 @@ header:
 distro: pce-xen
 machine: pcengines-apu2
 target:
-  - xen-image-minimal
-  - xen-guest-image-minimal
+  - xen-ndvm-image
+  - xen-dom0-image
 
 repos:
   meta-pcengines:
@@ -70,3 +70,5 @@ local_conf_header:
     BBFILE_PRIORITY_openembedded-layer = "4"
   xen-version: |
     PREFERRED_VERSION_xen = "4.13%"
+    WKS_FILE = "trenchboot-xen-image.wks"
+    IMAGE_BOOT_FILES = "bzImage xen.gz"

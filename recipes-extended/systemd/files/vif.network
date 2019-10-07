@@ -1,0 +1,5 @@
+[Match]
+Name=vif*
+
+[Network]
+Bridge=xenbr0

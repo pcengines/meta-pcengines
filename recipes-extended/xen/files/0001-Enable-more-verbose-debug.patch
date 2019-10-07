@@ -1,0 +1,43 @@
+From 1b16ab395c5ee119b8bc1c1e8752754dd62836cc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Micha=C5=82=20=C5=BBygowski?= <michal.zygowski@3mdeb.com>
+Date: Sat, 28 Sep 2019 13:24:08 +0200
+Subject: [PATCH] Enable more verbose debug
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Michał Żygowski <michal.zygowski@3mdeb.com>
+---
+ xen/arch/x86/numa.c        | 2 +-
+ xen/include/asm-x86/apic.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/xen/arch/x86/numa.c b/xen/arch/x86/numa.c
+index 7e1f563012..39f736d62c 100644
+--- a/xen/arch/x86/numa.c
++++ b/xen/arch/x86/numa.c
+@@ -22,7 +22,7 @@ static int numa_setup(const char *s);
+ custom_param("numa", numa_setup);
+ 
+ #ifndef Dprintk
+-#define Dprintk(x...)
++#define Dprintk(x...) printk(x)
+ #endif
+ 
+ /* from proto.h */
+diff --git a/xen/include/asm-x86/apic.h b/xen/include/asm-x86/apic.h
+index 4759279eb2..47c9ade515 100644
+--- a/xen/include/asm-x86/apic.h
++++ b/xen/include/asm-x86/apic.h
+@@ -5,7 +5,7 @@
+ #include <asm/fixmap.h>
+ #include <asm/msr.h>
+ 
+-#define Dprintk(x...) do {} while (0)
++#define Dprintk(x...) do { printk(x); } while (0)
+ 
+ /*
+  * Debugging macros
+-- 
+2.20.1
+

@@ -1,0 +1,73 @@
+header:
+  version: 8
+
+distro: pce-xen
+machine: pcengines-apu2
+target:
+  - xen-dom0-image
+
+repos:
+  meta-pcengines:
+
+  poky:
+    url: https://git.yoctoproject.org/git/poky
+    refspec: bf2e0b039a036f3e3f21d05c9dff843d0d293994
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp:
+
+  meta-openembedded:
+    url: http://git.openembedded.org/meta-openembedded
+    refspec: 6a5d6bc9ad2c6005a1bafabb2ac6e927370823e1
+    layers:
+      meta-oe:
+      meta-networking:
+      meta-filesystems:
+      meta-python:
+
+  meta-virtualization:
+    url: https://git.yoctoproject.org/git/meta-virtualization
+    refspec: ab382e2453d652181eb7a6fb4dcf201d4b33b94a
+
+  meta-security:
+    url: https://git.yoctoproject.org/git/meta-security
+    refspec: 76d3625bcf63aa61e9f8d238842d094c03de6790
+    layers:
+      meta-tpm:
+
+  meta-selinux:
+    url: https://git.yoctoproject.org/git/meta-selinux
+    refspec: e2185e487b437e811725e8bbe489d5194267a56a
+
+bblayers_conf_header:
+  standard: |
+    POKY_BBLAYERS_CONF_VERSION = "2"
+    BBPATH = "${TOPDIR}"
+    BBFILES ?= ""
+    LICENSE_FLAGS_WHITELIST = "commercial"
+local_conf_header:
+  standard: |
+    CONF_VERSION = "1"
+    PACKAGE_CLASSES = "package_rpm"
+    SDKMACHINE = "x86_64"
+    USER_CLASSES = "buildstats image-mklibs image-prelink"
+    PATCHRESOLVE = "noop"
+  debug-tweaks: |
+    EXTRA_IMAGE_FEATURES = "debug-tweaks"
+  diskmon: |
+    BB_DISKMON_DIRS = "\
+        STOPTASKS,${TMPDIR},1G,100K \
+        STOPTASKS,${DL_DIR},1G,100K \
+        STOPTASKS,${SSTATE_DIR},1G,100K \
+        STOPTASKS,/tmp,100M,100K \
+        ABORT,${TMPDIR},100M,1K \
+        ABORT,${DL_DIR},100M,1K \
+        ABORT,${SSTATE_DIR},100M,1K \
+        ABORT,/tmp,10M,1K"
+  oe-layer-priority: |
+    BBFILE_PRIORITY_openembedded-layer = "4"
+  xen-version: |
+    PREFERRED_VERSION_xen = "4.13%"
+    WKS_FILE = "trenchboot-xen-image.wks"
+    IMAGE_BOOT_FILES = "bzImage xen.gz"

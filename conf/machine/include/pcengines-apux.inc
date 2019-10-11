@@ -7,6 +7,7 @@ MULTILIBS ?= ""
 require conf/multilib.conf
 
 # Add serial consoles to kernel commandline
+SERIAL_CONSOLES = "115200;ttyUSB0"
 KERNEL_SERIAL_CONSOLE ??= "console=ttyS0,115200n8"
 APPEND += "${KERNEL_SERIAL_CONSOLE}"
 
@@ -20,10 +21,9 @@ XSERVER ?= "${XSERVER_X86_BASE} \
             ${XSERVER_X86_FBDEV} \
            "
 
-PREFERRED_VERSION_linux-yocto = "4.14%"
+PREFERRED_VERSION_linux-yocto = "4.19%"
 
 MACHINE_FEATURES += " \
-    efi \
     rtc \
     pcbios \
     vfat \
@@ -54,3 +54,13 @@ APPEND += "${APPEND_ADDITIONAL}"
 IMAGE_FSTYPES += "ext4"
 
 IMAGE_OVERHEAD_FACTOR = "1.1"
+
+KERNEL_MODULE_AUTOLOAD += " \
+    xen-netback \
+    xen_wdt \
+    xen-gntdev \
+    xen-gntalloc \
+    en-acpi-processor \
+    xen-pciback \
+    xen-blkback \
+"

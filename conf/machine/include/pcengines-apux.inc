@@ -1,7 +1,7 @@
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
 
 # provides gcc tune for Family 16h
-require conf/machine/include/tune-family16h.inc
+require conf/machine/include/tune-dbft3b.inc
 
 MULTILIBS ?= ""
 require conf/multilib.conf

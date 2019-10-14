@@ -29,4 +29,4 @@ sudo dd if=xen-dom0-image-pcengines-apu2.hddimg of=/dev/<drive_dir>
 
 # Bootup log
 
-The bootup log [example](#).  
+The bootup log [example](bootup.log).  

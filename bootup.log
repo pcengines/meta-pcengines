@@ -1,50 +1,74 @@
+
+CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7 | VT102 | Offline | ttyS1
+
+Press F10 key now for boot menuu
+                               , N for PXE boot
+Select boot device:
+
+1. USB MSC Drive Kingston DataTraveler 3.0 PMAP
+2. USB MSC Drive Kingston DataTraveler 3.0
+3. SD card SC16G 15193MiB
+4. AHCI/0: SanDisk SSD i110 16GB ATA-9 Hard-Disk (14566 MiBytes)
+5. iPXE
+6. Payload [setup]
+7. Payload [memtest]
+
+t. TPM Configuration
+
+Booting from Hard Disk...
+
+SYSLINUX 6.04 EDD 6.04-pre2 Copyright (C) 1994-2015 H. Peter Anvin et al
+boot:
+Loading /xen.gz... ok
+Loading /bzImage... ok
+Loading /initrd... ok
  Xen 4.13-unstable
-(XEN) Xen version 4.13-unstable (@) (x86_64-pce-linux-gcc (GCC) 9.2.0) debug=y  Fri Oct 11 12:07:10 UTC 2019
+(XEN) Xen version 4.13-unstable (@) (x86_64-pce-linux-gcc (GCC) 9.2.0) debug=y  Mon Oct 14 13:12:57 UTC 2019
 (XEN) Latest ChangeSet: Fri Aug 30 20:35:13 2019 +0100 git:1014f47c7a-dirty
-(XEN) build-id: fdb25615f7bfe685bac8d7b3b6803eb5cf9a19f5
-(XEN) Bootloader: u-root kexec
-(XEN) Command line: guest_loglvl=all dom0_mem=512M console=com1 no-real-mode
+(XEN) build-id: abc5b6b215fd3b9237af91ea3d1ad3560e843e1a
+(XEN) Bootloader: SYSLINUX 6.04 6.04-pre2
+(XEN) Command line: dom0_mem=1024M loglvl=all guest_loglvl=all console=com1,vga com1=115200,8n1
 (XEN) Xen image load base address: 0
 (XEN) Video information:
-(XEN)  VGA is text mode 80x25, font 8x16
+(XEN)  No VGA detected
 (XEN) Disc information:
-(XEN)  Found 0 MBR signatures
-(XEN)  Found 0 EDD information structures
-(XEN) Multiboot-e820 RAM map:
-(XEN)  0000000000000000 - 0000000000001000 (reserved)
-(XEN)  0000000000001000 - 00000000000a0000 (usable)
-(XEN)  00000000000c0000 - 0000000000100000 (reserved)
-(XEN)  0000000000100000 - 00000000cfe8f000 (usable)
-(XEN)  00000000cfe8f000 - 00000000d0000000 (reserved)
+(XEN)  Found 3 MBR signatures
+(XEN)  Found 4 EDD information structures
+(XEN) Xen-e820 RAM map:
+(XEN)  0000000000000000 - 000000000009fc00 (usable)
+(XEN)  000000000009fc00 - 00000000000a0000 (reserved)
+(XEN)  00000000000f0000 - 0000000000100000 (reserved)
+(XEN)  0000000000100000 - 00000000cfe92000 (usable)
+(XEN)  00000000cfe92000 - 00000000d0000000 (reserved)
 (XEN)  00000000f8000000 - 00000000fc000000 (reserved)
 (XEN)  00000000fed40000 - 00000000fed45000 (reserved)
 (XEN)  0000000100000000 - 000000012f000000 (usable)
 (XEN) New Xen image base address: 0xcf800000
-(XEN) ACPI: RSDP 000F0800, 0024 (r2 COREv4)
-(XEN) ACPI: XSDT CFEA00E0, 006C (r1 COREv4 COREBOOT        0 CORE 20180531)
-(XEN) ACPI: FACP CFEA1D70, 00F4 (r4 COREv4 COREBOOT        0 CORE 20180531)
-(XEN) ACPI: DSDT CFEA0280, 1AF0 (r2 COREv4 COREBOOT    10001 INTL 20180531)
-(XEN) ACPI: FACS CFEA0240, 0040
-(XEN) ACPI: SSDT CFEA1E70, 01E1 (r2 COREv4 COREBOOT       2A CORE 20180531)
-(XEN) ACPI: TPM2 CFEA2060, 004C (r4 COREv4 COREBOOT        0 CORE 20180531)
-(XEN) ACPI: APIC CFEA20B0, 007E (r2 COREv4 COREBOOT        0 CORE 20180531)
-(XEN) ACPI: HEST CFEA2130, 01D0 (r1 COREv4 COREBOOT        0 CORE 20180531)
-(XEN) ACPI: IVRS CFEA2300, 0128 (r1 COREv4 COREBOOT        0 CORE 20180531)
-(XEN) ACPI: SSDT CFEA2430, 48A6 (r2 AMD    AGESA           2 MSFT  4000000)
-(XEN) ACPI: SSDT CFEA6CE0, 07C8 (r1 AMD    AGESA           1 AMD         1)
-(XEN) ACPI: HPET CFEA74B0, 0038 (r1 COREv4 COREBOOT        0 CORE 20180531)
-(XEN) System RAM: 4078MB (4176056kB)
+(XEN) ACPI: RSDP 000F3AF0, 0024 (r2 COREv4)
+(XEN) ACPI: XSDT CFEA60E0, 006C (r1 COREv4 COREBOOT        0 CORE 20180531)
+(XEN) ACPI: FACP CFEA7D70, 00F4 (r4 COREv4 COREBOOT        0 CORE 20180531)
+(XEN) ACPI: DSDT CFEA6280, 1AF0 (r2 COREv4 COREBOOT    10001 INTL 20180531)
+(XEN) ACPI: FACS CFEA6240, 0040
+(XEN) ACPI: SSDT CFEA7E70, 01E1 (r2 COREv4 COREBOOT       2A CORE 20180531)
+(XEN) ACPI: TPM2 CFEA8060, 004C (r4 COREv4 COREBOOT        0 CORE 20180531)
+(XEN) ACPI: APIC CFEA80B0, 007E (r2 COREv4 COREBOOT        0 CORE 20180531)
+(XEN) ACPI: HEST CFEA8130, 01D0 (r1 COREv4 COREBOOT        0 CORE 20180531)
+(XEN) ACPI: IVRS CFEA8300, 0128 (r1 COREv4 COREBOOT        0 CORE 20180531)
+(XEN) ACPI: SSDT CFEA8430, 48A6 (r2 AMD    AGESA           2 MSFT  4000000)
+(XEN) ACPI: SSDT CFEACCE0, 07C8 (r1 AMD    AGESA           1 AMD         1)
+(XEN) ACPI: HPET CFEAD4B0, 0038 (r1 COREv4 COREBOOT        0 CORE 20180531)
+(XEN) System RAM: 4078MB (4176068kB)
 (XEN) No NUMA configuration found
 (XEN) Faking a node at 0000000000000000-000000012f000000
 (XEN) Domain heap initialised
 (XEN) CPU Vendor: AMD, Family 22 (0x16), Model 48 (0x30), Stepping 1 (raw 00730f01)
-(XEN) found SMP MP-table at 000f0400
+(XEN) found SMP MP-table at 000f38d0
 (XEN) DMI present.
 (XEN) Using APIC driver default
 (XEN) ACPI: PM-Timer IO Port: 0x818 (32 bits)
 (XEN) ACPI: SLEEP INFO: pm1x_cnt[1:804,1:0], pm1x_evt[1:800,1:0]
-(XEN) ACPI: 32/64X FACS address mismatch in FADT - cfea0240/0000000000000000, using 32
-(XEN) ACPI:             wakeup_vec[cfea024c], vec_size[20]
+(XEN) ACPI: 32/64X FACS address mismatch in FADT - cfea6240/0000000000000000, using 32
+(XEN) ACPI:             wakeup_vec[cfea624c], vec_size[20]
 (XEN) ACPI: Local APIC address 0xfee00000
 (XEN) ACPI: LAPIC (acpi_id[0x00] lapic_id[0x00] enabled)
 (XEN) ACPI: LAPIC (acpi_id[0x01] lapic_id[0x01] enabled)
@@ -89,7 +113,7 @@
 (XEN) Adding cpu 0 to runqueue 0
 (XEN)  First cpu on runqueue, activating
 (XEN) Platform timer is 14.318MHz HPET
-(XEN) Detected 998.137 MHz processor.
+(XEN) Detected 998.152 MHz processor.
 (XEN) alt table ffff82d0804741b0 -> ffff82d0804810e6
 (XEN) AMD-Vi: IOMMU Extended Features:
 (XEN) - Peripheral Page Service Request
@@ -133,10 +157,12 @@
 (XEN) HVM: HAP page sizes: 4kB, 2MB, 1GB
 (XEN) alt table ffff82d0804741b0 -> ffff82d0804810e6
 (XEN) Adding cpu 1 to runqueue 0
-(XEN) AMD-Vi: IO_PAGE_FAULT: domain = 0, device id = 0xa0, fault address = 0xfdf8000000, flags = 0x18
-(XEN) AMD-Vi: IO_PAGE_FAULT: domain = 0, device id = 0xa0, fault address = 0xfdf8000000, flags = 0x18
+(XEN) spurious 8259A interrupt: IRQ7.
+(XEN) CPU1: No irq handler for vector e7 (IRQ -2147483648)
 (XEN) Adding cpu 2 to runqueue 0
+(XEN) CPU2: No irq handler for vector e7 (IRQ -2147483648)
 (XEN) Adding cpu 3 to runqueue 0
+(XEN) CPU3: No irq handler for vector e7 (IRQ -2147483648)
 (XEN) Brought up 4 CPUs
 (XEN) Running stub recovery selftests...
 (XEN) traps.c:1567: GPF (0000): ffff82d0bffff041 [ffff82d0bffff041] -> ffff82d0803873ff
@@ -182,11 +208,12 @@
 (XEN)  Xen  kernel: 64-bit, lsb, compat32
 (XEN)  Dom0 kernel: 64-bit, PAE, lsb, paddr 0x1000000 -> 0x262c000
 (XEN) PHYSICAL MEMORY ARRANGEMENT:
-(XEN)  Dom0 alloc.:   0000000124000000->0000000128000000 (114688 pages to be allocated)
+(XEN)  Dom0 alloc.:   0000000124000000->0000000128000000 (239525 pages to be allocated)
+(XEN)  Init. ramdisk: 000000012d7a5000->000000012efffe00
 (XEN) VIRTUAL MEMORY ARRANGEMENT:
 (XEN)  Loaded kernel: ffffffff81000000->ffffffff8262c000
 (XEN)  Init. ramdisk: 0000000000000000->0000000000000000
-(XEN)  Phys-Mach map: 0000008000000000->0000008000100000
+(XEN)  Phys-Mach map: 0000008000000000->0000008000200000
 (XEN)  Start info:    ffffffff8262c000->ffffffff8262c4b8
 (XEN)  Xenstore ring: 0000000000000000->0000000000000000
 (XEN)  Console ring:  0000000000000000->0000000000000000
@@ -208,7 +235,7 @@
 mapping kernel into physical memory
 about to get started...
 Linux version 4.19.61-yocto-standard (oe-user@oe-host) (gcc version 9.2.0 (GCC)) #1 SMP PREEMPT Sat Sep 28 15:56:01 UTC 2019
-Command line: console=hvc0 earlyprintk=xen nomodeset root=/dev/sda2
+Command line: ramdisk_size=32768 root=/dev/ram0 rw console=hvc0 earlyprintk=xen console=tty0 panic=10 LABEL=boot debugshell=5
 x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
 x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
 x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
@@ -216,11 +243,10 @@ x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
 x86/fpu: Enabled xstate features 0x7, context size is 832 bytes, using 'standard' format.
 Released 0 page(s)
 BIOS-provided physical RAM map:
-Xen: [mem 0x0000000000000000-0x0000000000000fff] reserved
-Xen: [mem 0x0000000000001000-0x000000000009ffff] usable
-Xen: [mem 0x00000000000a0000-0x00000000000fffff] reserved
-Xen: [mem 0x0000000000100000-0x00000000cfe8efff] usable
-Xen: [mem 0x00000000cfe8f000-0x00000000cfffffff] reserved
+Xen: [mem 0x0000000000000000-0x000000000009efff] usable
+Xen: [mem 0x000000000009fc00-0x00000000000fffff] reserved
+Xen: [mem 0x0000000000100000-0x00000000cfe91fff] usable
+Xen: [mem 0x00000000cfe92000-0x00000000cfffffff] reserved
 Xen: [mem 0x00000000f7f00000-0x00000000f7f03fff] reserved
 Xen: [mem 0x00000000f8000000-0x00000000fbffffff] reserved
 Xen: [mem 0x00000000fec00000-0x00000000fec00fff] reserved
@@ -230,29 +256,30 @@ Xen: [mem 0x00000000fee00000-0x00000000feefffff] reserved
 Xen: [mem 0x0000000100000000-0x000000012effffff] usable
 NX (Execute Disable) protection: active
 SMBIOS 2.8 present.
-DMI: PC Engines apu2/apu2, BIOS v4.10.0.1 09/28/2019
+DMI: PC Engines apu2/apu2, BIOS v4.10.0.1 09/10/2019
 Hypervisor detected: Xen PV
-tsc: Detected 998.137 MHz processor
+tsc: Detected 998.152 MHz processor
 last_pfn = 0x12f000 max_arch_pfn = 0x400000000
 Disabled
 x86/PAT: MTRRs disabled, skipping PAT initialization too.
 x86/PAT: Configuration [0-7]: WB  WT  UC- UC  WC  WP  UC  UC
-last_pfn = 0xcfe8f max_arch_pfn = 0x400000000
+last_pfn = 0xcfe92 max_arch_pfn = 0x400000000
 Scanning 1 areas for low memory corruption
+RAMDISK: [mem 0x04000000-0x0585afff]
 ACPI: Early table checksum verification disabled
-ACPI: RSDP 0x00000000000F0800 000024 (v02 COREv4)
-ACPI: XSDT 0x00000000CFEA00E0 00006C (v01 COREv4 COREBOOT 00000000 CORE 20180531)
-ACPI: FACP 0x00000000CFEA1D70 0000F4 (v04 COREv4 COREBOOT 00000000 CORE 20180531)
-ACPI: DSDT 0x00000000CFEA0280 001AF0 (v02 COREv4 COREBOOT 00010001 INTL 20180531)
-ACPI: FACS 0x00000000CFEA0240 000040
-ACPI: SSDT 0x00000000CFEA1E70 0001E1 (v02 COREv4 COREBOOT 0000002A CORE 20180531)
-ACPI: TPM2 0x00000000CFEA2060 00004C (v04 COREv4 COREBOOT 00000000 CORE 20180531)
-ACPI: APIC 0x00000000CFEA20B0 00007E (v02 COREv4 COREBOOT 00000000 CORE 20180531)
-ACPI: HEST 0x00000000CFEA2130 0001D0 (v01 COREv4 COREBOOT 00000000 CORE 20180531)
-ACPI: IVRS 0x00000000CFEA2300 000128 (v01 COREv4 COREBOOT 00000000 CORE 20180531)
-ACPI: SSDT 0x00000000CFEA2430 0048A6 (v02 AMD    AGESA    00000002 MSFT 04000000)
-ACPI: SSDT 0x00000000CFEA6CE0 0007C8 (v01 AMD    AGESA    00000001 AMD  00000001)
-ACPI: HPET 0x00000000CFEA74B0 000038 (v01 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: RSDP 0x00000000000F3AF0 000024 (v02 COREv4)
+ACPI: XSDT 0x00000000CFEA60E0 00006C (v01 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: FACP 0x00000000CFEA7D70 0000F4 (v04 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: DSDT 0x00000000CFEA6280 001AF0 (v02 COREv4 COREBOOT 00010001 INTL 20180531)
+ACPI: FACS 0x00000000CFEA6240 000040
+ACPI: SSDT 0x00000000CFEA7E70 0001E1 (v02 COREv4 COREBOOT 0000002A CORE 20180531)
+ACPI: TPM2 0x00000000CFEA8060 00004C (v04 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: APIC 0x00000000CFEA80B0 00007E (v02 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: HEST 0x00000000CFEA8130 0001D0 (v01 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: IVRS 0x00000000CFEA8300 000128 (v01 COREv4 COREBOOT 00000000 CORE 20180531)
+ACPI: SSDT 0x00000000CFEA8430 0048A6 (v02 AMD    AGESA    00000002 MSFT 04000000)
+ACPI: SSDT 0x00000000CFEACCE0 0007C8 (v01 AMD    AGESA    00000001 AMD  00000001)
+ACPI: HPET 0x00000000CFEAD4B0 000038 (v01 COREv4 COREBOOT 00000000 CORE 20180531)
 Setting APIC routing to Xen PV.
 Zone ranges:
   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
@@ -260,8 +287,8 @@ Zone ranges:
   Normal   [mem 0x0000000100000000-0x000000012effffff]
 Movable zone start for each node
 Early memory node ranges
-  node   0: [mem 0x0000000000001000-0x000000000009ffff]
-  node   0: [mem 0x0000000000100000-0x00000000cfe8efff]
+  node   0: [mem 0x0000000000001000-0x000000000009efff]
+  node   0: [mem 0x0000000000100000-0x00000000cfe91fff]
   node   0: [mem 0x0000000100000000-0x000000012effffff]
 Reserved but unavailable: 1 pages
 Initmem setup node 0 [mem 0x0000000000001000-0x000000012effffff]
@@ -283,15 +310,12 @@ clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_
 random: get_random_bytes called from start_kernel+0x97/0x4c6 with crng_init=0
 setup_percpu: NR_CPUS:64 nr_cpumask_bits:64 nr_cpu_ids:4 nr_node_ids:1
 percpu: Embedded 45 pages/cpu s145560 r8192 d30568 u524288
-Built 1 zonelists, mobility grouping on.  Total pages: 1027678
-Kernel command line: console=hvc0 earlyprintk=xen nomodeset root=/dev/sda2
-You have booted with nomodeset. This means your GPU drivers are DISABLED
-Any video related functionality will be severely degraded, and you may not even be able to suspend the system properly
-Unless you actually understand what nomodeset does, you should reboot without enabling it
+Built 1 zonelists, mobility grouping on.  Total pages: 1027680
+Kernel command line: ramdisk_size=32768 root=/dev/ram0 rw console=hvc0 earlyprintk=xen console=tty0 panic=10 LABEL=boot debugshell=5
 Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes)
 Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes)
-software IO TLB: mapped [mem 0x16800000-0x1a800000] (64MB)
-Memory: 346708K/4176056K available (12300K kernel code, 1288K rwdata, 2672K rodata, 1596K init, 1084K bss, 3829348K reserved, 0K cma-reserved)
+software IO TLB: mapped [mem 0x36800000-0x3a800000] (64MB)
+Memory: 846052K/4176064K available (12300K kernel code, 1288K rwdata, 2672K rodata, 1596K init, 1084K bss, 3330012K reserved, 0K cma-reserved)
 SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
 ftrace: allocating 38466 entries in 151 pages
 rcu: Preemptible hierarchical RCU implementation.
@@ -307,8 +331,8 @@ console [hvc0] enabled
 ACPI: Core revision 20180810
 clocksource: xen: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
 installing Xen timer for CPU 0
-clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x1cc66e5fe7a, max_idle_ns: 881590436107 ns
-Calibrating delay loop (skipped), value calculated using timer frequency.. 1996.27 BogoMIPS (lpj=998137)
+clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x1cc68aad149, max_idle_ns: 881590465839 ns
+Calibrating delay loop (skipped), value calculated using timer frequency.. 1996.30 BogoMIPS (lpj=998152)
 pid_max: default: 32768 minimum: 301
 Security Framework initialized
 Mount-cache hash table entries: 8192 (order: 4, 65536 bytes)
@@ -339,15 +363,15 @@ Grant table initialized
 ACPI: bus type PCI registered
 PCI: Using configuration type 1 for base access
 PCI: Using configuration type 1 for extended access
-raid6: sse2x1   gen()  1171 MB/s
+raid6: sse2x1   gen()  1402 MB/s
 random: fast init done
-raid6: sse2x1   xor()   681 MB/s
-raid6: sse2x2   gen()  1363 MB/s
-raid6: sse2x2   xor()  1003 MB/s
-raid6: sse2x4   gen()  1648 MB/s
-raid6: sse2x4   xor()  1087 MB/s
-raid6: using algorithm sse2x4 gen() 1648 MB/s
-raid6: .... xor() 1087 MB/s, rmw enabled
+raid6: sse2x1   xor()   785 MB/s
+raid6: sse2x2   gen()  1613 MB/s
+raid6: sse2x2   xor()  1187 MB/s
+raid6: sse2x4   gen()  1894 MB/s
+raid6: sse2x4   xor()  1265 MB/s
+raid6: using algorithm sse2x4 gen() 1894 MB/s
+raid6: .... xor() 1265 MB/s, rmw enabled
 raid6: using ssse3x2 recovery algorithm
 ACPI: Added _OSI(Module Device)
 ACPI: Added _OSI(Processor Device)
@@ -375,10 +399,15 @@ pci_bus 0000:00: root bus resource [bus 00-ff]
 (XEN) PCI add device 0000:00:00.0
 (XEN) PCI add device 0000:00:00.2
 (XEN) PCI add device 0000:00:02.0
+pci 0000:00:02.1: enabling Extended Tags
 (XEN) PCI add device 0000:00:02.1
+pci 0000:00:02.2: enabling Extended Tags
 (XEN) PCI add device 0000:00:02.2
+pci 0000:00:02.3: enabling Extended Tags
 (XEN) PCI add device 0000:00:02.3
+pci 0000:00:02.4: enabling Extended Tags
 (XEN) PCI add device 0000:00:02.4
+pci 0000:00:02.5: enabling Extended Tags
 (XEN) PCI add device 0000:00:02.5
 (XEN) PCI add device 0000:00:08.0
 (XEN) PCI add device 0000:00:10.0
@@ -463,9 +492,11 @@ RPC: Registered tcp transport module.
 RPC: Registered tcp NFSv4.1 backchannel transport module.
 Already setup the GSI :18
 pci 0000:00:13.0: PME# does not work under D3, disabling it
+Trying to unpack rootfs image as initramfs...
+Freeing initrd memory: 24940K
 Scanning for low memory corruption every 60 seconds
 Initialise system trusted keyrings
-workingset: timestamp_bits=46 max_order=17 bucket_order=0
+workingset: timestamp_bits=46 max_order=18 bucket_order=0
 NFS: Registering the id_resolver key type
 Key type id_resolver registered
 Key type id_legacy registered
@@ -496,6 +527,8 @@ xen:xen_evtchn: Event-channel device installed
 xen_mcelog: /dev/mcelog registered by Xen
 Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
 00:03: ttyS1 at I/O 0x2f8 (irq = 3, base_baud = 115200) is a 16550A
+serial8250: ttyS2 at I/O 0x3e8 (irq = 4, base_baud = 115200) is a 16550A
+serial8250: ttyS3 at I/O 0x2e8 (irq = 3, base_baud = 115200) is a 16550A
 tpm_tis 00:04: 2.0 TPM (device-id 0x1A, rev-id 16)
 brd: module loaded
 loop: module loaded
@@ -538,160 +571,158 @@ igb 0000:03:00.0: eth1: (PCIe:2.5Gb/s:Width x1) 00:0d:b9:43:3f:bd
 igb 0000:03:00.0: eth1: PBA No: FFFFFF-0FF
 igb 0000:03:00.0: Using MSI-X interrupts. 4 rx queue(s), 4 tx queue(s)
 pps pps2: new PPS source ptp2
-igb 000kernel read-only data: 18432k
+igb 0000:04:00.0: added PHC on eth2
+igb 0000:04:00.0: Intel(R) Gigabit Ethernet Network Connection
+igb 0000:04:00.0: eth2: (PCIe:2.5Gb/s:Width x1) 00:0d:b9:43:3f:be
+igb 0000:04:00.0: eth2: PBA No: FFFFFF-0FF
+igb 0000:04:00.0: Using MSI-X interrupts. 4 rx queue(s), 4 tx queue(s)
+xen_netfront: Initialising Xen virtual ethernet driver
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+ehci-pci: EHCI PCI platform driver
+Already setup the GSI :18
+ehci-pci 0000:00:13.0: EHCI Host Controller
+ehci-pci 0000:00:13.0: new USB bus registered, assigned bus number 1
+ehci-pci 0000:00:13.0: applying AMD SB700/SB800/Hudson-2/3 EHCI dummy qh workaround
+ehci-pci 0000:00:13.0: debug port 2
+ehci-pci 0000:00:13.0: irq 18, io mem 0xf7fa6000
+ehci-pci 0000:00:13.0: USB 2.0 started, EHCI 1.00
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 2 ports detected
+ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+ohci-pci: OHCI PCI platform driver
+uhci_hcd: USB Universal Host Controller Interface driver
+Already setup the GSI :18
+xhci_hcd 0000:00:10.0: xHCI Host Controller
+xhci_hcd 0000:00:10.0: new USB bus registered, assigned bus number 2
+xhci_hcd 0000:00:10.0: hcc params 0x014040c3 hci version 0x100 quirks 0x0000000000000410
+hub 2-0:1.0: USB hub found
+hub 2-0:1.0: 2 ports detected
+xhci_hcd 0000:00:10.0: xHCI Host Controller
+xhci_hcd 0000:00:10.0: new USB bus registered, assigned bus number 3
+xhci_hcd 0000:00:10.0: Host supports USB 3.0 SuperSpeed
+usb usb3: We don't know the algorithms for LPM for this host, disabling LPM.
+hub 3-0:1.0: USB hub found
+hub 3-0:1.0: 2 ports detected
+usbcore: registered new interface driver usb-storage
+usbcore: registered new interface driver usbserial_generic
+usbserial: USB Serial support registered for generic
+usbcore: registered new interface driver ftdi_sio
+usbserial: USB Serial support registered for FTDI USB Serial Device
+usbcore: registered new interface driver pl2303
+usbserial: USB Serial support registered for pl2303
+i8042: PNP: No PS/2 controller found.
+mousedev: PS/2 mouse device common for all mice
+rtc_cmos 00:01: RTC can wake from S4
+rtc_cmos 00:01: registered as rtc0
+rtc_cmos 00:01: alarms up to one day, 114 bytes nvram
+device-mapper: ioctl: 4.39.0-ioctl (2018-04-03) initialised: dm-devel@redhat.com
+sdhci: Secure Digital Host Controller Interface driver
+sdhci: Copyright(c) Pierre Ossman
+sdhci-pci 0000:00:14.7: SDHCI controller found [1022:7813] (rev 1)
+mmc0: SDHCI controller on PCI [0000:00:14.7] using ADMA
+sdhci-pltfm: SDHCI platform and OF driver helper
+usbcore: registered new interface driver usbhid
+usbhid: USB HID core driver
+u32 classifier
+    Actions configured
+NET: Registered protocol family 10
+Segment Routing with IPv6
+sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+NET: Registered protocol family 17
+Key type dns_resolver registered
+mce: Using 2 MCE banks
+sched_clock: Marking stable (3352844765, 25454089)->(3400400627, -22101773)
+Loading compiled-in X.509 certificates
+Btrfs loaded, crc32c=crc32c-generic
+Key type encrypted registered
+console [netcon0] enabled
+netconsole: network logging started
+rtc_cmos 00:01: setting system clock to 2019-10-21 12:12:48 UTC (1571659968)
+ALSA device list:
+  No soundcards found.
+ata2: SATA link down (SStatus 0 SControl 300)
+ata3: SATA link down (SStatus 0 SControl 300)
+mmc0: new high speed SDHC card at address aaaa
+mmcblk0: mmc0:aaaa SC16G 14.8 GiB
+usb 1-1: new high-speed USB device number 2 using ehci-pci
+ata1: SATA link up 6.0 Gbps (SStatus 133 SControl 300)
+ata1.00: native sectors (28867584) is smaller than sectors (29832192)
+ata1.00: ATA-9: SanDisk SSD i110 16GB, i21J719, max UDMA/133
+ata1.00: 29832192 sectors, multi 1: LBA48 NCQ (depth 32)
+ata1.00: configured for UDMA/133
+scsi 0:0:0:0: Direct-Access     ATA      SanDisk SSD i110 719  PQ: 0 ANSI: 5
+sd 0:0:0:0: [sda] 29832192 512-byte logical blocks: (15.3 GB/14.2 GiB)
+sd 0:0:0:0: [sda] Write Protect is off
+sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+ sda: sda1 sda2
+sd 0:0:0:0: [sda] Attached SCSI disk
+usb 3-1: new SuperSpeed Gen 1 USB device number 2 using xhci_hcd
+usb-storage 3-1:1.0: USB Mass Storage device detected
+scsi host4: usb-storage 3-1:1.0
+hub 1-1:1.0: USB hub found
+hub 1-1:1.0: 4 ports detected
+usb 3-2: new SuperSpeed Gen 1 USB device number 3 using xhci_hcd
+usb-storage 3-2:1.0: USB Mass Storage device detected
+scsi host5: usb-storage 3-2:1.0
+ata4: SATA link down (SStatus 0 SControl 300)
+Freeing unused kernel image memory: 1596K
+Write protecting the kernel read-only data: 18432k
 Freeing unused kernel image memory: 2012K
 Freeing unused kernel image memory: 1424K
-Run /sbin/init as init process
-clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x1cc66e5fe7a, max_idle_ns: 881590436107 ns
+Run /init as init process
+clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x1cc68aad149, max_idle_ns: 881590465839 ns
 clocksource: Switched to clocksource tsc
-systemd[1]: systemd 242-85-g07f0549+ running in system mode. (-PAM -AUDIT -SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP -LIBCRYPTSETUP -GCRYPT -GNUTLS +ACL +XZ -LZ4 -SECCOMP +BLKID -ELFUTILS +KMOD -IDN2)
-systemd[1]: Detected architecture x86-64.
-
-Welcome to Reference Yocto distro for PC Engines hardware 0.1 (master)!
-
-systemd[1]: Set hostname to <pcengines-apu2>.
-systemd[1]: /lib/systemd/system/xen-qemu-dom0-disk-backend.service:11: PIDFile= references a path below legacy directory /var/run/, updating /var/run/xen/qemu-dom0.pid b /run/xen/qemu-dom0.pid; please u .
-systemd[1]: /lib/systemd/system/dbus.socket:5: ListenStream= references a path below legacy directory /var/run/, updating /var/run/dbus/system_bus_socket b /run/dbus/system_bus_socket; please update the .
-random: systemd: uninitialized urandom read (16 bytes read)
-systemd[1]: Reached target Remote File Systems.
-[  OK  ] Reached target Remote File Systems.
-random: systemd: uninitialized urandom read (16 bytes read)
-systemd[1]: Listening on udev Control Socket.
-[  OK  ] Listening on udev Control Socket.
-random: systemd: uninitialized urandom read (16 bytes read)
-systemd[1]: Listening on udev Kernel Socket.
-[  OK  ] Listening on udev Kernel Socket.
-systemd[1]: Created slice system-getty.slice.
-[  OK  ] Created slice system-getty.slice.
-systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
-[  OK  ] Started Dispatch Password b&ts to Console Directory Watch.
-[  OK  ] Listening on Journal Socket.
-         Starting Remount Root and Kernel File Systems...
-[  OK  ] Listening on initctl Compatibility Named Pipe.
-         Mounting POSIX Message Queue File System...
-[  OK  ] Listening on Syslog Socket.
-[  OK  ] Listening on Journal Socket (/dev/log).
-         Starting Create list of reb&odes for the current kernel...
-         Starting udev Coldplug all Devices...
-[  OK  ] Started Hardware RNG Entropy Gatherer Daemon.
-EXT4-fs (sda2): re-mounted. Opts: (null)
-         Mounting Mount /proc/xen files...
-[  OK  ] Listening on Network Service Netlink Socket.
-[  OK  ] Started Forward Password Rb&uests to Wall Directory Watch.
-[  OK  ] Reached target Paths.
-         Mounting Kernel Debug File System...
-[  OK  ] Created slice system-serial\x2dgetty.slice.
-         Starting Load Kernel Modules...
-         Starting Journal Service...
-[  OK  ] Created slice User and Session Slice.
-[  OK  ] Reached target Slices.
-[  OK  ] Reached target Swap.
-         Mounting Temporary Directory (/tmp)...
 scsi 4:0:0:0: Direct-Access     Kingston DataTraveler 3.0 PMAP PQ: 0 ANSI: 6
 sd 4:0:0:0: [sdb] 30277632 512-byte logical blocks: (15.5 GB/14.4 GiB)
 sd 4:0:0:0: [sdb] Write Protect is off
 sd 4:0:0:0: [sdb] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
-openvswitch: Open vSwitch switching datapath
-[  OK  ] Started Remount Root and Kernel File Systems.
-[  OK  ] Mounted POSIX Message Queue File System.
-[  OK  ] Started Create list of reqb& nodes for the current kernel.
-[  OK  ] Mounted Mount /proc/xen files.
-[  OK  ] Mounted Kernel Debug File System.
-[  OK  ] Mounted Temporary Directory (/tmp).
-xen_pciback: backend is vpci
-xen_wdt xen_wdt: initialized (timeout=60s, nowayout=0)
  sdb: sdb1 sdb2 < sdb5 >
 sd 4:0:0:0: [sdb] Attached SCSI removable disk
-         Starting Create Static Device Nodes in /dev...
-[  OK  ] Started Load Kernel Modules.
-         Starting Apply Kernel Variables...
-[  OK  ] Started Create Static Device Nodes in /dev.
-[  OK  ] Reached target Local File Systems (Pre).
-         Mounting mount xenstore file system...
-         Mounting /var/volatile...
-         Starting udev Kernel Device Manager...
-[  OK  ] Started Apply Kernel Variables.
-[  OK  ] Mounted mount xenstore file system.
-[  OK  ] Mounted /var/volatile.
-         Starting Load/Save Random Seed...
-[  OK  ] Started Load/Save Random Seed.
-[  OK  ] Started udev Kernel Device Manager.
-         Starting Network Service...
-[  OK  ] Started Network Service.
-[  OK  ] Started Journal Service.
-random: crng init done
-random: 7 urandom warning(s) missed due to ratelimiting
-         Starting Flush Journal to Persistent Storage...
-systemd-journald[136]: Received request to flush runtime journal from PID 1
-[  OK  ] Started Flush Journal to Persistent Storage.
+scsi 5:0:0:0: Direct-Access     Kingston DataTraveler 3.0      PQ: 0 ANSI: 6
+sd 5:0:0:0: [sdc] 30218842 512-byte logical blocks: (15.5 GB/14.4 GiB)
+sd 5:0:0:0: [sdc] Write Protect is off
+sd 5:0:0:0: [sdc] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+ sdc:
+sd 5:0:0:0: [sdc] Attached SCSI removable disk
 igb 0000:02:00.0 enp2s0: renamed from eth0
 igb 0000:03:00.0 enp3s0: renamed from eth1
+random: crng init done
 igb 0000:04:00.0 enp4s0: renamed from eth2
-[  OK  ] Started udev Coldplug all Devices.
-IPv6: ADDRCONF(NETDEV_UP): enp2s0: link is not ready
-IPv6: ADDRCONF(NETDEV_UP): enp3s0: link is not ready
-IPv6: ADDRCONF(NETDEV_UP): enp4s0: link is not ready
-[  OK  ] Found device SanDisk_SSD_i110_16GB boot.
-igb 0000:02:00.0 enp2s0: igb: enp2s0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX/TX
-igb 0000:03:00.0 enp3s0: igb: enp3s0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX/TX
-igb 0000:04:00.0 enp4s0: igb: enp4s0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX/TX
-IPv6: ADDRCONF(NETDEV_CHANGE): enp2s0: link becomes ready
-         Mounting /boot...
-IPv6: ADDRCONF(NETDEV_CHANGE): enp3s0: link becomes ready
+FAT-fs (sdc): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+EXT4-fs (sdb1): recovery complete
+EXT4-fs (sdb1): mounted filesystem with ordered data mode. Opts: (null)
+EXT4-fs (mmcblk0): recovery complete
+EXT4-fs (mmcblk0): mounted filesystem with ordered data mode. Opts: (null)
+EXT4-fs (sda2): recovery complete
+EXT4-fs (sda2): mounted filesystem with ordered data mode. Opts: (null)
 EXT4-fs (sda1): recovery complete
 EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
-[  OK  ] Mounted /boot.
-[  OK  ] Reached target Local File Systems.
+EXT4-fs (loop0): mounted filesystem with ordered data mode. Opts: (null)
+systemd[1]: systemd 242-85-g07f0549+ running in system mode. (-PAM -AUDIT -SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP -LIBCRYPTSETUP -GCRYPT -GNUTLS +ACL +XZ -LZ4 -SECCOMP +BLKID -ELFUTILS +KMOD -IDN2)
+systemd[1]: Detected architecture x86-64.
+systemd[1]: Set hostname to <pcengines-apu2>.
+systemd[1]: /lib/systemd/system/xen-qemu-dom0-disk-backend.service:11: PIDFile= references a path below legacy directory /var/run/, updating /var/run/xen/qemu-dom0.pid b /run/xen/qemu-dom0.pid; please u .
+systemd[1]: /lib/systemd/system/dbus.socket:5: ListenStream= references a path below legacy directory /var/run/, updating /var/run/dbus/system_bus_socket b /run/dbus/system_bus_socket; please update the .
+systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+systemd[1]: Listening on Network Service Netlink Socket.
+systemd[1]: Created slice User and Session Slice.
+systemd[1]: Listening on initctl Compatibility Named Pipe.
+systemd[1]: Reached target Remote File Systems.
+xen_pciback: backend is vpci
+xen_wdt xen_wdt: initialized (timeout=60s, nowayout=0)
+EXT4-fs (loop0): re-mounted. Opts: (null)
+systemd-journald[683]: Received request to flush runtime journal from PID 1
+IPv6: ADDRCONF(NETDEV_UP): enp3s0: link is not ready
+IPv6: ADDRCONF(NETDEV_UP): enp2s0: link is not ready
+IPv6: ADDRCONF(NETDEV_UP): enp4s0: link is not ready
+igb 0000:03:00.0 enp3s0: igb: enp3s0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX/TX
+igb 0000:02:00.0 enp2s0: igb: enp2s0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX/TX
+igb 0000:04:00.0 enp4s0: igb: enp4s0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX/TX
+IPv6: ADDRCONF(NETDEV_CHANGE): enp3s0: link becomes ready
+IPv6: ADDRCONF(NETDEV_CHANGE): enp2s0: link becomes ready
 IPv6: ADDRCONF(NETDEV_CHANGE): enp4s0: link becomes ready
-         Starting Create Volatile Files and Directories...
-[  OK  ] Started Create Volatile Files and Directories.
-         Starting Network Name Resolution...
-         Starting Network Time Synchronization...
-         Starting Update UTMP about System Boot/Shutdown...
-[  OK  ] Started Update UTMP about System Boot/Shutdown.
-[  OK  ] Started Network Time Synchronization.
-[  OK  ] Reached target System Time Set.
-[  OK  ] Reached target System Time Synchronized.
-[  OK  ] Reached target System Initialization.
-         Starting sshd.socket.
-[  OK  ] Started Daily Cleanup of Temporary Directories.
-[  OK  ] Reached target Timers.
-[  OK  ] Listening on D-Bus System Message Bus Socket.
-[  OK  ] Started Network Name Resolution.
-[  OK  ] Reached target Host and Network Name Lookups.
-[  OK  ] Listening on sshd.socket.
-[  OK  ] Reached target Sockets.
-[  OK  ] Reached target Basic System.
-[  OK  ] Started D-Bus System Message Bus.
-         Starting Login Service...
-[  OK  ] Started Serial Getty on hvc0.
-[  OK  ] Started System Logging Service.
-         Starting Open vSwitch Database Unit...
-[  OK  ] Started Getty on tty1.
-[  OK  ] Reached target Login Prompts.
-         Starting The Xen xenstore...
-[  OK  ] Started Kernel Logging Service.
-[  OK  ] Started Login Service.
-         Starting Hostname Service...
-[  OK  ] Started The Xen xenstore.
-         Starting Xenconsoled - hanb&est consoles and hypervisor...
-         Starting xen-init-dom0, inb&s, JSON configuration stub)...
-[  OK  ] Started Hostname Service.
-[  OK  ] Started Xenconsoled - handb&guest consoles and hypervisor.
-         Starting qemu for xen dom0 disk backend...
-[  OK  ] Started xen-init-dom0, inib&des, JSON configuration stub).
-[  OK  ] Started qemu for xen dom0 disk backend.
-         Starting Xendomains - starb&guests on boot and shutdown...
-[  OK  ] Started Xendomains - startb&p guests on boot and shutdown.
-         Starting Xen-watchdog - run xen watchdog daemon...
-[  OK  ] Started Xen-watchdog - run xen watchdog daemon.
-[  OK  ] Started Open vSwitch Database Unit.
-         Starting Open vSwitch Forwarding Unit...
-[  OK  ] Started Open vSwitch Forwarding Unit.
-         Starting Open vSwitch...
-[  OK  ] Started Open vSwitch.
-[  OK  ] Reached target Multi-User System.
-         Starting Update UTMP about System Runlevel Changes...
-[  OK  ] Reached target Network.
-[  OK  ] Started Update UTMP about System Runlevel Changes.
 
+Reference Yocto distro for PC Engines hardware 0.1 pcengines-apu2 hvc0
+
+pcengines-apu2 login: root
+root@pcengines-apu2:~#

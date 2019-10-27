@@ -1,0 +1,68 @@
+Fix detection of host compiler "no-pie"/"nopie" and link flags.
+
+Detection of the "no-pie" vs "nopie" flag needs to be performed for both
+the host and target compilers; cannot assume that one works for the other.
+
+Use EXTRA_HOST_CFLAGS and EXTRA_HOST_LDFLAGS variables for passing
+host tool parameters if required. Removes previous hardcoded "-O2 -g".
+
+Signed-off-by: Christopher Clark <christopher.clark6@baesystems.com>
+Index: src/Makefile.housekeeping
+===================================================================
+--- src.orig/Makefile.housekeeping
++++ src/Makefile.housekeeping
+@@ -133,6 +133,7 @@ eval :
+ WORKAROUND_CFLAGS :=
+ WORKAROUND_ASFLAGS :=
+ WORKAROUND_LDFLAGS :=
++WORKAROUND_HOST_CFLAGS :=
+ 
+ # Make syntax does not allow use of comma or space in certain places.
+ # This ugly workaround is suggested in the manual.
+@@ -454,7 +455,7 @@ endif
+ CFLAGS		+= $(WORKAROUND_CFLAGS) $(EXTRA_CFLAGS)
+ ASFLAGS		+= $(WORKAROUND_ASFLAGS) $(EXTRA_ASFLAGS)
+ LDFLAGS		+= $(WORKAROUND_LDFLAGS) $(EXTRA_LDFLAGS)
+-HOST_CFLAGS	+= -O2 -g
++HOST_CFLAGS	+= $(EXTRA_HOST_CFLAGS)
+ 
+ # Inhibit -Werror if NO_WERROR is specified on make command line
+ #
+@@ -1379,7 +1380,7 @@ endif # defined(BIN)
+ # The compression utilities
+ #
+ 
+-ZBIN_LDFLAGS := -llzma
++ZBIN_LDFLAGS := -llzma $(EXTRA_HOST_LDFLAGS)
+ 
+ $(ZBIN) : util/zbin.c $(MAKEDEPS)
+ 	$(QM)$(ECHO) "  [HOSTCC] $@"
+Index: src/arch/i386/Makefile
+===================================================================
+--- src.orig/arch/i386/Makefile
++++ src/arch/i386/Makefile
+@@ -78,11 +78,20 @@ CFLAGS			+= -Ui386
+ # -nopie.  We therefore test for both.
+ #
+ ifeq ($(CCTYPE),gcc)
+-PIE_TEST = [ -z "`$(CC) -fno-PIE -no-pie -x c -c /dev/null -o /dev/null 2>&1`" ]
+-PIE_FLAGS := $(shell $(PIE_TEST) && $(ECHO) '-fno-PIE -no-pie')
+-PIE_TEST2 = [ -z "`$(CC) -fno-PIE -nopie -x c -c /dev/null -o /dev/null 2>&1`" ]
++PIE_TEST1_FLAGS = "-fno-PIE -no-pie -x c -c /dev/null -o /dev/null 2>&1"
++PIE_TEST2_FLAGS = "-fno-PIE -nopie -x c -c /dev/null -o /dev/null 2>&1"
++
++PIE_TEST1 = [ -z "`$(CC) "$(PIE_TEST1_FLAGS)"`" ]
++PIE_TEST2 = [ -z "`$(CC) "$(PIE_TEST2_FLAGS)"`" ]
++PIE_FLAGS1 := $(shell $(PIE_TEST1) && $(ECHO) '-fno-PIE -no-pie')
+ PIE_FLAGS2 := $(shell $(PIE_TEST2) && $(ECHO) '-fno-PIE -nopie')
+-WORKAROUND_CFLAGS += $(PIE_FLAGS) $(PIE_FLAGS2)
++WORKAROUND_CFLAGS += $(PIE_FLAGS1) $(PIE_FLAGS2)
++
++HOST_PIE_TEST1 = [ -z "`$(HOSTCC) "$(PIE_TEST1_FLAGS)"`" ]
++HOST_PIE_TEST2 = [ -z "`$(HOSTCC) "$(PIE_TEST2_FLAGS)"`" ]
++HOST_PIE_FLAGS1 := $(shell $(HOST_PIE_TEST1) && $(ECHO) '-fno-PIE -no-pie')
++HOST_PIE_FLAGS2 := $(shell $(HOST_PIE_TEST2) && $(ECHO) '-fno-PIE -nopie')
++WORKAROUND_HOST_CFLAGS += $(HOST_PIE_FLAGS1) $(HOST_PIE_FLAGS2)
+ endif
+ 
+ # i386-specific directories containing source files

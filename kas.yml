@@ -11,7 +11,7 @@ repos:
 
   poky:
     url: https://git.yoctoproject.org/git/poky
-    refspec: bf2e0b039a036f3e3f21d05c9dff843d0d293994
+    refspec: b23f006851e5aaf920d0d4dfccbb96da954eda20
     layers:
       meta:
       meta-poky:
@@ -19,7 +19,7 @@ repos:
 
   meta-openembedded:
     url: http://git.openembedded.org/meta-openembedded
-    refspec: 6a5d6bc9ad2c6005a1bafabb2ac6e927370823e1
+    refspec: e0daf6f8e0c53e388c631b8cdf3d7d8173dcea95
     layers:
       meta-oe:
       meta-networking:
@@ -28,17 +28,17 @@ repos:
 
   meta-virtualization:
     url: https://git.yoctoproject.org/git/meta-virtualization
-    refspec: ab382e2453d652181eb7a6fb4dcf201d4b33b94a
+    refspec: 062d9f1f4faf2ca8a1fe78b7c7365e6378c15836
 
   meta-security:
     url: https://git.yoctoproject.org/git/meta-security
-    refspec: 76d3625bcf63aa61e9f8d238842d094c03de6790
+    refspec: cf4de6a7b8c7bfa244c9da4c31f32a4bf104c34c
     layers:
       meta-tpm:
 
   meta-selinux:
     url: https://git.yoctoproject.org/git/meta-selinux
-    refspec: e2185e487b437e811725e8bbe489d5194267a56a
+    refspec: 	44d760413920ba440439b8bc7c2a71ca26cd7a2d
 
 bblayers_conf_header:
   standard: |

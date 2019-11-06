@@ -17,6 +17,7 @@ DISTRO_FEATURES = " \
     systemd \
     usbgadget \
     usbhost \
+    virtualization \
 "
 
 # disable sysvinit

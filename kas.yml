@@ -11,7 +11,7 @@ repos:
 
   poky:
     url: https://git.yoctoproject.org/git/poky
-    refspec: b23f006851e5aaf920d0d4dfccbb96da954eda20
+    refspec: d0ac956dc2454da252ab718267af0dcf504e6a13
     layers:
       meta:
       meta-poky:
@@ -38,7 +38,7 @@ repos:
 
   meta-selinux:
     url: https://git.yoctoproject.org/git/meta-selinux
-    refspec: 	44d760413920ba440439b8bc7c2a71ca26cd7a2d
+    refspec: 44d760413920ba440439b8bc7c2a71ca26cd7a2d
 
 bblayers_conf_header:
   standard: |

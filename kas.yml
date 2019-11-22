@@ -1,11 +1,6 @@
 header:
   version: 8
 
-distro: pce-xen
-machine: pcengines-apu2
-target:
-  - xen-dom0-image
-
 repos:
   meta-pcengines:
 
@@ -67,5 +62,3 @@ local_conf_header:
         ABORT,/tmp,10M,1K"
   oe-layer-priority: |
     BBFILE_PRIORITY_openembedded-layer = "4"
-  xen-version: |
-    PREFERRED_VERSION_xen = "4.13%"

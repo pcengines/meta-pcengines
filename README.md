@@ -11,7 +11,7 @@ Yocto BSP layer for PC Engines hardware
 # Building
 
 ```
-SHELL=bash kas-docker --ssh-dir ~/ssh-keys build meta-pcengines/kas.yml
+SHELL=bash kas-docker --ssh-dir ~/ssh-keys build meta-pcengines/kas-docker.yml
 ```
 # Flashing drive with dd 
 

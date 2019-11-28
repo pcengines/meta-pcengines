@@ -13,5 +13,3 @@ IMAGE_INSTALL_append = " \
     git \
     packagegroup-core-buildessential \
   "
-
-PREFERRED_PROVIDER_pcengines/bsp = "flashrom"

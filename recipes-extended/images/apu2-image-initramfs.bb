@@ -1,4 +1,4 @@
-require recipes-core/images/core-image-minimal-initramfs.bb
+require recipes-core/images/core-image-minimal.bb
 
 IMAGE_INSTALL_append = " \
   flashrom \

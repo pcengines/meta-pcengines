@@ -1,0 +1,9 @@
+header:
+  version: 8
+  includes:
+  - kas.yml
+
+distro: pce-xen
+machine: pcengines-apu2
+target:
+  - xen-dom0-image

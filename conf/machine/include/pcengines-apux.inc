@@ -55,6 +55,8 @@ IMAGE_FSTYPES += "ext4"
 
 IMAGE_OVERHEAD_FACTOR = "1.1"
 
+KERNEL_IMAGETYPE = "bzImage"
+
 KERNEL_MODULE_AUTOLOAD_pce-xen += " \
     xen-netback \
     xen_wdt \

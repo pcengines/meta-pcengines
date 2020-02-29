@@ -46,7 +46,7 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         """
         disk_dir = "%s/hdd" % cr_workdir
         grub_legacy_install_cmd = "grub-install %s" % disk_dir
-        exec_cmd(grub_legacy_install_cmd, native_sysroot)
+        exec_cmd(grub_legacy_install_cmd)
 
     @classmethod
     def do_configure_grub_legacy(cls, hdddir, creator, cr_workdir,
@@ -119,7 +119,7 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
                         "%s/grub.cfg" % cr_workdir)
         shutil.move("%s/grub.cfg" % cr_workdir,
                     "%s/hdd/boot/grub/grub.cfg" % cr_workdir)
-
+        cls.do_install_grub_legacy(cr_workdir, native_sysroot)
         startup = os.path.join(kernel_dir, "startup.nsh")
         if os.path.exists(startup):
             cp_cmd = "cp %s %s/" % (startup, hdddir)

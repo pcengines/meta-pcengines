@@ -40,13 +40,21 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         raise WicError("Couldn't find correct bootimg_dir exiting")
 
     @classmethod
-    def do_install_grub_legacy(cls, cr_workdir, native_sysroot):
+    def do_install_disk(cls, disk, disk_name, creator, workdir, oe_builddir,
+                        bootimg_dir, kernel_dir, native_sysroot):
         """
-        Install grub legacy on the boot partition.
+        Called after all partitions have been prepared and assembled into a
+        disk image.  In this case, we install the MBR.
         """
-        disk_dir = "%s/hdd" % cr_workdir
-        grub_legacy_install_cmd = "grub-install %s" % disk_dir
-        exec_cmd(grub_legacy_install_cmd)
+        bootimg_dir = cls._get_bootimg_dir(bootimg_dir, 'syslinux')
+        mbrfile = "%s/syslinux/" % bootimg_dir
+        mbrfile += "mbr.bin"
+        full_path = creator._full_path(workdir, disk_name, "direct")
+        logger.debug("Installing MBR on disk %s as %s with size %s bytes",
+                     disk_name, full_path, disk.min_size)
+
+        dd_cmd = "dd if=%s of=%s conv=notrunc" % (mbrfile, full_path)
+        exec_cmd(dd_cmd, native_sysroot)
 
     @classmethod
     def do_configure_grub_legacy(cls, hdddir, creator, cr_workdir,
@@ -63,12 +71,12 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         grub_conf += "default=boot\n"
         grub_conf += "menuentry 'boot' {\n"
 
-        kernel = "/bzImage"
-        rootdev = "/dev/sda"
+        kernel = "(hd0,msdos1)/bzImage"
+        rootdev = "(hostdisk//dev/sda,msdos2)"
+        serial = "console=ttyS0,115200 earlyprintk=serial,ttyS0,115200"
 
-        grub_conf += "linux %s root=%s rootwait %s\n" \
-            % (kernel, rootdev, bootloader.append)
-
+        grub_conf += "linux %s root=%s ro %s\n" \
+            % (kernel, rootdev, serial)
         initrd = source_params.get('initrd')
 
         if initrd:
@@ -111,7 +119,6 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         staging_kernel_dir = kernel_dir
 
         hdddir = "%s/hdd/boot" % cr_workdir
-
         install_cmd = "install -m 0644 %s/bzImage %s/bzImage" % \
             (staging_kernel_dir, hdddir)
         exec_cmd(install_cmd)
@@ -119,7 +126,6 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
                         "%s/grub.cfg" % cr_workdir)
         shutil.move("%s/grub.cfg" % cr_workdir,
                     "%s/hdd/boot/grub/grub.cfg" % cr_workdir)
-        cls.do_install_grub_legacy(cr_workdir, native_sysroot)
         startup = os.path.join(kernel_dir, "startup.nsh")
         if os.path.exists(startup):
             cp_cmd = "cp %s %s/" % (startup, hdddir)
@@ -138,21 +144,9 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
 
         logger.debug("Added %d extra blocks to %s to get to %d total blocks",
                      extra_blocks, part.mountpoint, blocks)
-
-        # dosfs image, created by mkdosfs
-        bootimg = "%s/boot.img" % cr_workdir
-
-        label = part.label if part.label else "ESP"
-
-        dosfs_cmd = "mkdosfs -n %s -i %s -C %s %d" % \
-                    (label, part.fsuuid, bootimg, blocks)
-        exec_native_cmd(dosfs_cmd, native_sysroot)
-
-        mcopy_cmd = "mcopy -i %s -s %s/* ::/" % (bootimg, hdddir)
-        exec_native_cmd(mcopy_cmd, native_sysroot)
-
-        chmod_cmd = "chmod 644 %s" % bootimg
-        exec_cmd(chmod_cmd)
+        bootimg_dir = "/work/build/tmp/work/pcengines_apu2-mezrit-linux/mezrit-otbr-image/1.0-r0/rootfs/usr/lib64/grub/i386-pc/boot.img"
+        # dosfs image, created by mkdosf
+        bootimg = "%s" % bootimg_dir
 
         du_cmd = "du -Lbks %s" % bootimg
         out = exec_cmd(du_cmd)

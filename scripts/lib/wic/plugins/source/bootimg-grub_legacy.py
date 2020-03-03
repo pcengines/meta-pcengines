@@ -39,6 +39,7 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
 
         raise WicError("Couldn't find correct bootimg_dir exiting")
 
+
     @classmethod
     def do_install_disk(cls, disk, disk_name, creator, workdir, oe_builddir,
                         bootimg_dir, kernel_dir, native_sysroot):
@@ -46,15 +47,31 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         Called after all partitions have been prepared and assembled into a
         disk image.  In this case, we install the MBR.
         """
+        """
         bootimg_dir = cls._get_bootimg_dir(bootimg_dir, 'syslinux')
         mbrfile = "%s/syslinux/" % bootimg_dir
         mbrfile += "mbr.bin"
+        """
+        bootimg_dir = get_bitbake_var("IMAGE_ROOTFS") + "/usr/lib64/grub"
+        mbrfile = "%s/i386-pc/boot.img" % bootimg_dir
         full_path = creator._full_path(workdir, disk_name, "direct")
         logger.debug("Installing MBR on disk %s as %s with size %s bytes",
                      disk_name, full_path, disk.min_size)
-
+        """
         dd_cmd = "dd if=%s of=%s conv=notrunc" % (mbrfile, full_path)
         exec_cmd(dd_cmd, native_sysroot)
+        """
+
+    @classmethod
+    def do_install_core_image(cls, grubdir ,native_sysroot):
+        """
+        Create the core image in the grub directory.
+        """
+        cmd_core = ('grub-mkimage -O i386-pc -o ' +
+                    ('%s/i386-pc/core.img ' % grubdir) +
+                    ("-d %s/i386-pc -p '(hd0,msdos1)/grub' " % grubdir) +
+                    'biosdisk part_msdos fat')
+        exec_cmd(cmd_core, native_sysroot)
 
     @classmethod
     def do_configure_grub_legacy(cls, hdddir, creator, cr_workdir,
@@ -71,8 +88,8 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         grub_conf += "default=boot\n"
         grub_conf += "menuentry 'boot' {\n"
 
-        kernel = "(hd0,msdos1)/bzImage"
-        rootdev = "(hostdisk//dev/sda,msdos2)"
+        kernel = "/bzImage"
+        rootdev = "/dev/sda2"
         serial = "console=ttyS0,115200 earlyprintk=serial,ttyS0,115200"
 
         grub_conf += "linux %s root=%s ro %s\n" \
@@ -115,38 +132,51 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
             kernel_dir = get_bitbake_var("DEPLOY_DIR_IMAGE")
             if not kernel_dir:
                 raise WicError("Couldn't find DEPLOY_DIR_IMAGE, exiting")
-
         staging_kernel_dir = kernel_dir
 
+        # Copying kernel
         hdddir = "%s/hdd/boot" % cr_workdir
         install_cmd = "install -m 0644 %s/bzImage %s/bzImage" % \
             (staging_kernel_dir, hdddir)
         exec_cmd(install_cmd)
-        shutil.copyfile("%s/hdd/boot/grub/grub.cfg" % cr_workdir,
-                        "%s/grub.cfg" % cr_workdir)
-        shutil.move("%s/grub.cfg" % cr_workdir,
-                    "%s/hdd/boot/grub/grub.cfg" % cr_workdir)
-        startup = os.path.join(kernel_dir, "startup.nsh")
-        if os.path.exists(startup):
-            cp_cmd = "cp %s %s/" % (startup, hdddir)
-            exec_cmd(cp_cmd, True)
 
+        # Copying grub modules
+        grub_dir_native = get_bitbake_var("IMAGE_ROOTFS") + "/usr/lib64/grub"
+        shutil.copytree("%s/i386-pc" % (grub_dir_native),
+                        "%s/grub/i386-pc" % hdddir)
+
+        # Creating core.img
+        grub_dir_hdd = "%s/grub" % hdddir
+        cls.do_install_core_image(grub_dir_hdd, native_sysroot)
+
+        # Counting size
         du_cmd = "du -bks %s" % hdddir
         out = exec_cmd(du_cmd)
-        blocks = int(out.split()[0])
 
+        blocks = int(out.split()[0])
         extra_blocks = part.get_extra_block_count(blocks)
 
         if extra_blocks < BOOTDD_EXTRA_SPACE:
             extra_blocks = BOOTDD_EXTRA_SPACE
-
         blocks += extra_blocks
 
         logger.debug("Added %d extra blocks to %s to get to %d total blocks",
                      extra_blocks, part.mountpoint, blocks)
-        bootimg_dir = "/work/build/tmp/work/pcengines_apu2-mezrit-linux/mezrit-otbr-image/1.0-r0/rootfs/usr/lib64/grub/i386-pc/boot.img"
-        # dosfs image, created by mkdosf
-        bootimg = "%s" % bootimg_dir
+
+        # dosfs image, created by mkdosfs
+        bootimg = "%s/boot.img" % cr_workdir
+
+        label = part.label if part.label else "ESP"
+
+        dosfs_cmd = "mkdosfs -n %s -i %s -C %s %d" % \
+                    (label, part.fsuuid, bootimg, blocks)
+        exec_native_cmd(dosfs_cmd, native_sysroot)
+
+        mcopy_cmd = "mcopy -i %s -s %s/* ::/" % (bootimg, hdddir)
+        exec_native_cmd(mcopy_cmd, native_sysroot)
+
+        chmod_cmd = "chmod 644 %s" % bootimg
+        exec_cmd(chmod_cmd)
 
         du_cmd = "du -Lbks %s" % bootimg
         out = exec_cmd(du_cmd)

@@ -47,20 +47,28 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         Called after all partitions have been prepared and assembled into a
         disk image.  In this case, we install the MBR.
         """
-        """
+
         bootimg_dir = cls._get_bootimg_dir(bootimg_dir, 'syslinux')
         mbrfile = "%s/syslinux/" % bootimg_dir
         mbrfile += "mbr.bin"
         """
         bootimg_dir = get_bitbake_var("IMAGE_ROOTFS") + "/usr/lib64/grub"
         mbrfile = "%s/i386-pc/boot.img" % bootimg_dir
+        """
+
         full_path = creator._full_path(workdir, disk_name, "direct")
         logger.debug("Installing MBR on disk %s as %s with size %s bytes",
                      disk_name, full_path, disk.min_size)
-        """
+
         dd_cmd = "dd if=%s of=%s conv=notrunc" % (mbrfile, full_path)
         exec_cmd(dd_cmd, native_sysroot)
-        """
+
+        grub_dir = "%s/hdd/boot/grub/i386-pc" % workdir
+        cmd_bios_setup = 'grub-bios-setup -f -r "hd0,msdos1" -d %s %s' % (
+                          grub_dir,
+                          full_path
+                          )
+        exec_cmd(cmd_bios_setup)
 
     @classmethod
     def do_install_core_image(cls, grubdir ,native_sysroot):
@@ -72,6 +80,7 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
                     ("-d %s/i386-pc -p '(hd0,msdos1)/grub' " % grubdir) +
                     'biosdisk part_msdos fat')
         exec_cmd(cmd_core, native_sysroot)
+
 
     @classmethod
     def do_configure_grub_legacy(cls, hdddir, creator, cr_workdir,

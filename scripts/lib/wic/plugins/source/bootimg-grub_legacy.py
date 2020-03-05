@@ -60,11 +60,17 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         logger.debug("Installing MBR on disk %s as %s with size %s bytes",
                      disk_name, full_path, disk.min_size)
 
+        device_map_path = "%s/device.map" % workdir
+        device_map_content = "(hd0) %s" % full_path
+        with open(device_map_path, 'w') as file:
+            file.write(device_map_content)
+
         dd_cmd = "dd if=%s of=%s conv=notrunc" % (mbrfile, full_path)
         exec_cmd(dd_cmd, native_sysroot)
 
         grub_dir = "%s/hdd/boot/grub/i386-pc" % workdir
-        cmd_bios_setup = 'grub-bios-setup -f -r "hd0,msdos1" -d %s %s' % (
+        cmd_bios_setup = 'grub-bios-setup -v --device-map=%s -r "hd0,msdos1" -d %s %s' % (
+                          device_map_path,
                           grub_dir,
                           full_path
                           )
@@ -75,11 +81,14 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         """
         Create the core image in the grub directory.
         """
-        cmd_core = ('grub-mkimage -O i386-pc -o ' +
-                    ('%s/i386-pc/core.img ' % grubdir) +
-                    ("-d %s/i386-pc -p '(hd0,msdos1)/grub' " % grubdir) +
-                    'biosdisk part_msdos fat')
-        exec_cmd(cmd_core, native_sysroot)
+        grub_modules = "at_keyboard biosdisk boot chain configfile ext2 fat linux ls part_msdos reboot serial vga"
+        cmd_mkimage = "grub-mkimage -p %s -d %s/i386-pc -o %s/i386-pc/core.img -O i386-pc %s" % (
+                       "/boot/grub",
+                       grubdir,
+                       grubdir,
+                       grub_modules)
+
+        exec_cmd(cmd_mkimage)
 
 
     @classmethod

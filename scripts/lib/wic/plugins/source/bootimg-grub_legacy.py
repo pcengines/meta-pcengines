@@ -74,7 +74,7 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
                           grub_dir,
                           full_path
                           )
-        exec_cmd(cmd_bios_setup)
+        exec_cmd(cmd_bios_setup, native_sysroot)
 
     @classmethod
     def do_install_core_image(cls, grubdir ,native_sysroot):

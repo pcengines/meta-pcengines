@@ -83,7 +83,7 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         """
         grub_modules = "at_keyboard biosdisk boot chain configfile ext2 fat linux ls part_msdos reboot serial vga"
         cmd_mkimage = "grub-mkimage -p %s -d %s/i386-pc -o %s/i386-pc/core.img -O i386-pc %s" % (
-                       "/boot/grub",
+                       "(hd0,msdos1)/grub",
                        grubdir,
                        grubdir,
                        grub_modules)

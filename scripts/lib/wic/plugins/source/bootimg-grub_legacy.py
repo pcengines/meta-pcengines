@@ -90,40 +90,55 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
 
         exec_cmd(cmd_mkimage)
 
-
     @classmethod
     def do_configure_grub_legacy(cls, hdddir, creator, cr_workdir,
                                  source_params):
         """
-        Create grub-legacy config
+        Check if custom config exists in deploy dir, if not create config file.
         """
+
         # Create config file
         bootloader = creator.ks.bootloader
+        hdddir = "%s/hdd/boot/grub" % cr_workdir
 
-        grub_conf = ""
-        grub_conf += "serial --unit=0 --speed=115200\n"
-        grub_conf += "terminal --timeout=%s serial\n" % bootloader.timeout
-        grub_conf += "default=boot\n"
-        grub_conf += "menuentry 'boot' {\n"
+        install_cmd = "install -d %s" % hdddir
+        exec_cmd(install_cmd)
 
-        kernel = "/bzImage"
-        rootdev = "/dev/sda2"
-        serial = "console=ttyS0,115200 earlyprintk=serial,ttyS0,115200"
+        deploy_dir = get_bitbake_var("DEPLOY_DIR_IMAGE")
+        grub_cfg_dir = "%s/%s" % (deploy_dir, "grub.cfg")
 
-        grub_conf += "linux %s root=%s ro %s\n" \
-            % (kernel, rootdev, serial)
-        initrd = source_params.get('initrd')
+        if os.path.exists(grub_cfg_dir):
+            shutil.copyfile(grub_cfg_dir, "%s/grub.cfg" % hdddir)
+        else:
+            grub_conf = ""
+            grub_conf += "serial --unit=0 --speed=115200\n"
+            grub_conf += "terminal --timeout=%s serial\n" % bootloader.timeout
+            grub_conf += "default=boot\n"
+            grub_conf += "menuentry 'boot' {\n"
 
-        if initrd:
-            grub_conf += "initrd /%s\n" % initrd
+            kernel = "/bzImage"
+            rootdev = "/dev/sda2"
+            serial = "console=ttyS0,115200 earlyprintk=serial,ttyS0,115200"
 
-        grub_conf += "}\n"
+            grub_conf += "linux %s root=%s %s\n" \
+                % (kernel, rootdev, serial)
+            initrd = source_params.get('initrd')
 
-        logger.debug("Writing grub config %s/hdd/boot/grub/grub.cfg",
-                     cr_workdir)
-        cfg = open("%s/hdd/boot/grub/grub.cfg" % cr_workdir, "w")
-        cfg.write(grub_conf)
-        cfg.close()
+            if initrd:
+                grub_conf += "initrd /%s\n" % initrd
+
+            grub_conf += "}\n"
+
+            logger.debug("Writing grub config %s/hdd/boot/grub/grub.cfg",
+                        cr_workdir)
+            cfg = open("%s/hdd/boot/grub/grub.cfg" % cr_workdir, "w")
+            cfg.write(grub_conf)
+            cfg.close()
+
+        # Check if custom grubenv file exists
+        grubenv_dir = "%s/%s" % (deploy_dir, "grubenv")
+        if os.path.exists(grubenv_dir):
+            shutil.copyfile(grubenv_dir, "%s/grubenv" % hdddir)
 
     @classmethod
     def do_configure_partition(cls, part, source_params, creator, cr_workdir,

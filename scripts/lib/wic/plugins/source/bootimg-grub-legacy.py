@@ -28,7 +28,7 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
     Create partition for Grub legacy.
     """
 
-    name = 'bootimg-grub_legacy'
+    name = 'bootimg-grub-legacy'
 
     @classmethod
     def _get_bootimg_dir(cls, bootimg_dir, dirname):

@@ -2,11 +2,13 @@
 # SPDX-License-Identifier: GPL-2.0-only
 #
 # DESCRIPTION
-# This implements the 'bootimg-grub_legacy' source plugin class for 'wic'
+# This implements the 'bootimg-grub-legacy' source plugin class for 'wic'
 #
 # AUTHORS
 # Norbert Kamiński <norbert.kaminski (at) 3mbeb.com>
 #
+# This file is derived from bootimg-efi.py and bootimg-pcbios.py by:
+#   Tom Zanussi <tom.zanussi (at] linux.intel.com>
 
 import logging
 import os
@@ -51,10 +53,6 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
         bootimg_dir = cls._get_bootimg_dir(bootimg_dir, 'syslinux')
         mbrfile = "%s/syslinux/" % bootimg_dir
         mbrfile += "mbr.bin"
-        """
-        bootimg_dir = get_bitbake_var("IMAGE_ROOTFS") + "/usr/lib64/grub"
-        mbrfile = "%s/i386-pc/boot.img" % bootimg_dir
-        """
 
         full_path = creator._full_path(workdir, disk_name, "direct")
         logger.debug("Installing MBR on disk %s as %s with size %s bytes",

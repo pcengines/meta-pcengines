@@ -1,6 +1,9 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-yocto:"
 
-SRC_URI += " file://edac.cfg"
+SRC_URI += " \
+    file://edac.cfg \
+    file://athxk.cfg \
+"
 
 # base on generic config from:
 # http://git.yoctoproject.org/cgit/cgit.cgi/yocto-kernel-cache/tree/bsp/common-pc-64/common-pc-64.scc?h=yocto-4.14

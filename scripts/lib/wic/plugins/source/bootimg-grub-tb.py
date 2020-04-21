@@ -193,7 +193,7 @@ class BootimgGrubTbPlugin(SourcePlugin):
         exec_cmd(install_cmd)
 
         # Copying grub modules
-        grub_dir_native = get_bitbake_var("IMAGE_ROOTFS") + "/usr/lib64/grub"
+        grub_dir_native = get_bitbake_var("IMAGE_ROOTFS") + "/usr/lib64/grub-tb"
         shutil.copytree("%s/i386-pc" % (grub_dir_native),
                         "%s/grub/i386-pc" % hdddir)
 

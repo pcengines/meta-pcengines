@@ -118,7 +118,7 @@ class BootimgGrubTbPlugin(SourcePlugin):
             grub_conf += "menuentry 'boot' {\n"
 
             kernel = "/bzImage"
-            bootdev = "/dev/sda1"
+            bootdev = "(hd0,msdos1)"
             rootdev = "/dev/sda2"
             serial = "console=ttyS0,115200 earlyprintk=serial,ttyS0,115200"
 
@@ -133,8 +133,8 @@ class BootimgGrubTbPlugin(SourcePlugin):
             # Secure launch
             grub_conf += "\n"
             grub_conf += "menuentry 'secure-boot' {\n"
-            grub_conf += "  slaunch skinit"
-            grub_conf += "  slaunch_module %s/boot/lz_header" % bootdev
+            grub_conf += "  slaunch skinit\n"
+            grub_conf += "  slaunch_module %s/lz_header\n" % bootdev
             grub_conf += "  linux %s root=%s %s\n" \
                 % (kernel, rootdev, serial)
 

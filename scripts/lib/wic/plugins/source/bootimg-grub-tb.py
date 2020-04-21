@@ -187,8 +187,8 @@ class BootimgGrubTbPlugin(SourcePlugin):
             (staging_kernel_dir, hdddir)
         exec_cmd(install_cmd)
 
-        # Copying lz-header
-        install_cmd = "install -m 0600 %s/lz-header %s/lz-header" % \
+        # Copying lz_header
+        install_cmd = "install -m 0600 %s/lz_header %s/lz_header" % \
             (staging_kernel_dir, hdddir)
         exec_cmd(install_cmd)
 

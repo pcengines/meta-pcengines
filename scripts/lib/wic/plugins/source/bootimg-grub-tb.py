@@ -134,7 +134,7 @@ class BootimgGrubTbPlugin(SourcePlugin):
             grub_conf += "\n"
             grub_conf += "menuentry 'secure-boot' {\n"
             grub_conf += "  slaunch skinit\n"
-            grub_conf += "  slaunch_module %s/lz_header\n" % bootdev
+            grub_conf += "  slaunch_module %s/lz_header.bin\n" % bootdev
             grub_conf += "  linux %s root=%s %s\n" \
                 % (kernel, rootdev, serial)
 
@@ -188,7 +188,7 @@ class BootimgGrubTbPlugin(SourcePlugin):
         exec_cmd(install_cmd)
 
         # Copying lz_header
-        install_cmd = "install -m 0600 %s/lz_header %s/lz_header" % \
+        install_cmd = "install -m 0600 %s/lz_header.bin %s/lz_header.bin" % \
             (staging_kernel_dir, hdddir)
         exec_cmd(install_cmd)
 

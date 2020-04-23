@@ -129,7 +129,7 @@ class BootimgGrubTbPlugin(SourcePlugin):
 
             grub_conf += "  insmod part_msdos\n"
             grub_conf += "  set root=%s\n" % bootdev
-            grub_conf += "  multiboot %s %s %s\n"
+            grub_conf += "  multiboot %s %s %s\n" \
                 % (xen, dom0_conf, dom0_serial)
             grub_conf += "  module %s root=%s %s\n" \
                 % (kernel, rootdev, kernel_params)
@@ -146,7 +146,7 @@ class BootimgGrubTbPlugin(SourcePlugin):
             grub_conf += "  set root=%s\n" % bootdev
             grub_conf += "  slaunch skinit\n"
             grub_conf += "  slaunch_module %s/lz_header.bin\n" % bootdev
-            grub_conf += "  multiboot %s %s %s\n"
+            grub_conf += "  multiboot %s %s %s\n" \
                 % (xen, dom0_conf, dom0_serial)
             grub_conf += "  module %s root=%s %s\n" \
                 % (kernel, rootdev, kernel_params)
@@ -255,11 +255,10 @@ class BootimgGrubTbPlugin(SourcePlugin):
             install_cmd = "install -m 0644 %s/xen.gz %s/xen.gz" % \
                 (staging_kernel_dir, hdddir)
             exec_cmd(install_cmd)
-
-        # Uncompressing xen
-        with gzip.open('%s/xen.gz' % hdddir, 'rb') as f_in:
-            with open('%s/xen' % hdddir, 'wb') as f_out:
-                shutil.copyfileobj(f_in, f_out)
+            # Uncompressing xen
+            with gzip.open('%s/xen.gz' % hdddir, 'rb') as f_in:
+                with open('%s/xen' % hdddir, 'wb') as f_out:
+                    shutil.copyfileobj(f_in, f_out)
 
         # Creating core.img
         grub_dir_hdd = "%s/grub" % hdddir

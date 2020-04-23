@@ -14,6 +14,7 @@
 import logging
 import os
 import shutil
+import gzip
 
 from wic import WicError
 from wic.engine import get_custom_config
@@ -105,9 +106,61 @@ class BootimgGrubTbPlugin(SourcePlugin):
 
         deploy_dir = get_bitbake_var("DEPLOY_DIR_IMAGE")
         grub_cfg_dir = "%s/%s" % (deploy_dir, "grub.cfg")
+        xen_gz_dir = "%s/%s" % (deploy_dir, "xen.gz")
 
         if os.path.exists(grub_cfg_dir):
             shutil.copyfile(grub_cfg_dir, "%s/grub.cfg" % hdddir)
+        elif os.path.exists(xen_gz_dir):
+            initrd = source_params.get('initrd')
+
+            grub_conf = ""
+            grub_conf += "serial --unit=0 --speed=115200\n"
+            grub_conf += "terminal --timeout=%s serial\n" % bootloader.timeout
+            grub_conf += "default=boot\n"
+            grub_conf += "menuentry 'boot-xen' {\n"
+
+            xen = "/xen"
+            kernel = "/bzImage"
+            bootdev = "(hd0,msdos1)"
+            dom0_conf = "dom0_mem=2G loglvl=all guest_loglvl=all"
+            dom0_serial = "com1=115200,8n1 console=com1 no-real-mode"
+            rootdev = "/dev/sda2"
+            kernel_params = "console=hvc0 earlyprintk=xen nomodeset"
+
+            grub_conf += "  insmod part_msdos\n"
+            grub_conf += "  set root=%s\n" % bootdev
+            grub_conf += "  multiboot %s %s %s\n"
+                % (xen, dom0_conf, dom0_serial)
+            grub_conf += "  module %s root=%s %s\n" \
+                % (kernel, rootdev, kernel_params)
+
+            if initrd:
+                grub_conf += "  module initrd /%s\n" % initrd
+
+            grub_conf += "}\n"
+
+            # Secure launch
+            grub_conf += "\n"
+            grub_conf += "menuentry 'secure-boot-xen' {\n"
+            grub_conf += "  insmod part_msdos\n"
+            grub_conf += "  set root=%s\n" % bootdev
+            grub_conf += "  slaunch skinit\n"
+            grub_conf += "  slaunch_module %s/lz_header.bin\n" % bootdev
+            grub_conf += "  multiboot %s %s %s\n"
+                % (xen, dom0_conf, dom0_serial)
+            grub_conf += "  module %s root=%s %s\n" \
+                % (kernel, rootdev, kernel_params)
+
+            if initrd:
+                grub_conf += "  module initrd /%s\n" % initrd
+
+            grub_conf += "}\n"
+
+            logger.debug("Writing grub config %s/hdd/boot/grub/grub.cfg",
+                        cr_workdir)
+            cfg = open("%s/hdd/boot/grub/grub.cfg" % cr_workdir, "w")
+            cfg.write(grub_conf)
+            cfg.close()
         else:
             initrd = source_params.get('initrd')
 
@@ -196,6 +249,17 @@ class BootimgGrubTbPlugin(SourcePlugin):
         grub_dir_native = get_bitbake_var("IMAGE_ROOTFS") + "/usr/lib64/grub-tb"
         shutil.copytree("%s/i386-pc" % (grub_dir_native),
                         "%s/grub/i386-pc" % hdddir)
+
+        # Copying xen module if exists
+        if os.path.exists("%s/xen.gz" % staging_kernel_dir):
+            install_cmd = "install -m 0644 %s/xen.gz %s/xen.gz" % \
+                (staging_kernel_dir, hdddir)
+            exec_cmd(install_cmd)
+
+        # Uncompressing xen
+        with gzip.open('%s/xen.gz' % hdddir, 'rb') as f_in:
+            with open('%s/xen' % hdddir, 'wb') as f_out:
+                shutil.copyfileobj(f_in, f_out)
 
         # Creating core.img
         grub_dir_hdd = "%s/grub" % hdddir

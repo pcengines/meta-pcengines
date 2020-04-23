@@ -129,13 +129,13 @@ class BootimgGrubTbPlugin(SourcePlugin):
 
             grub_conf += "  insmod part_msdos\n"
             grub_conf += "  set root=%s\n" % bootdev
-            grub_conf += "  multiboot %s %s %s\n" \
+            grub_conf += "  multiboot2 %s %s %s\n" \
                 % (xen, dom0_conf, dom0_serial)
-            grub_conf += "  module %s root=%s %s\n" \
+            grub_conf += "  module2 %s root=%s %s\n" \
                 % (kernel, rootdev, kernel_params)
 
             if initrd:
-                grub_conf += "  module initrd /%s\n" % initrd
+                grub_conf += "  module2 initrd /%s\n" % initrd
 
             grub_conf += "}\n"
 
@@ -146,13 +146,13 @@ class BootimgGrubTbPlugin(SourcePlugin):
             grub_conf += "  set root=%s\n" % bootdev
             grub_conf += "  slaunch skinit\n"
             grub_conf += "  slaunch_module %s/lz_header.bin\n" % bootdev
-            grub_conf += "  multiboot %s %s %s\n" \
+            grub_conf += "  multiboot2 %s %s %s\n" \
                 % (xen, dom0_conf, dom0_serial)
-            grub_conf += "  module %s root=%s %s\n" \
+            grub_conf += "  module2 %s root=%s %s\n" \
                 % (kernel, rootdev, kernel_params)
 
             if initrd:
-                grub_conf += "  module initrd /%s\n" % initrd
+                grub_conf += "  module2 initrd /%s\n" % initrd
 
             grub_conf += "}\n"
 

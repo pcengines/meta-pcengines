@@ -165,9 +165,15 @@ class BootimgGrubLegacyPlugin(SourcePlugin):
                 raise WicError("Couldn't find DEPLOY_DIR_IMAGE, exiting")
         staging_kernel_dir = kernel_dir
 
-        # Copying kernel
+        # Copying kernel for partition 2
         hdddir = "%s/hdd/boot" % cr_workdir
         install_cmd = "install -m 0644 %s/bzImage %s/bzImage" % \
+            (staging_kernel_dir, hdddir)
+        exec_cmd(install_cmd)
+
+        # Copying kernel for partition 3
+        hdddir = "%s/hdd/boot" % cr_workdir
+        install_cmd = "install -m 0644 %s/bzImage %s/bzImage_b" % \
             (staging_kernel_dir, hdddir)
         exec_cmd(install_cmd)
 

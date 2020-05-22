@@ -3,7 +3,7 @@ header:
   includes:
   - kas.yml
 
-distro: pce-base
+distro: pce-xen
 machine: pcengines-apu2
 target:
-  - docker-image-minimal
+  - xen-dom0-image

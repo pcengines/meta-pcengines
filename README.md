@@ -1,6 +1,6 @@
 # WARNING
 
-This is WIP repo and it is under development. Use it at your own risk. 
+This is WIP repo is under development. Use it at your own risk.
 If you have use-cases for such thing to be developed, please submit
 an issue or PR with description of your needs / fixes.
 
@@ -10,18 +10,20 @@ Yocto BSP layer for PC Engines hardware
 
 # Building
 
+Make sure to adjust `~/ssh-keys` according to your configuration:
+
 ```
 SHELL=bash kas-docker --ssh-dir ~/ssh-keys build meta-pcengines/kas-docker.yml
 ```
-# Flashing drive with dd 
 
-Check a directory of the drive to be flash using the command:
+Check a device node of the drive to be flashed:
 
 ```
 sudo fdisk -l
-``` 
+```
 
-Change directory to  <build-directory>/tmp/deploy/images/pcengines-apu2 and flash the drive:
+Change directory to `<build-directory>/tmp/deploy/images/pcengines-apu2`. Find
+desired image and flash the drive:
 
 ```
 sudo dd if=xen-dom0-image-pcengines-apu2.hddimg of=/dev/<drive_dir>
@@ -29,4 +31,4 @@ sudo dd if=xen-dom0-image-pcengines-apu2.hddimg of=/dev/<drive_dir>
 
 # Bootup log
 
-The bootup log [example](bootup.log).  
+The bootup log [example](bootup.log).

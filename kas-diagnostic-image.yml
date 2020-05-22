@@ -6,4 +6,4 @@ header:
 distro: pce-base
 machine: pcengines-apu2
 target:
-  - docker-image-minimal
+  - apu2-diagnostic-image

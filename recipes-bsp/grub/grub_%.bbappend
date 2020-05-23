@@ -1,4 +1,4 @@
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND += "native"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += " \

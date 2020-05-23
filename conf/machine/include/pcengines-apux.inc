@@ -21,6 +21,7 @@ XSERVER ?= "${XSERVER_X86_BASE} \
             ${XSERVER_X86_FBDEV} \
            "
 
+PREFERRED_PROVIDER_virtual/kernel = "linux-stable"
 PREFERRED_VERSION_linux-yocto = "4.19%"
 
 MACHINE_FEATURES += " \

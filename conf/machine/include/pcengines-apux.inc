@@ -3,9 +3,6 @@ PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
 # provides gcc tune for Family 16h
 require conf/machine/include/tune-dbft3b.inc
 
-MULTILIBS ?= ""
-require conf/multilib.conf
-
 # Add serial consoles to kernel commandline
 SERIAL_CONSOLES = "115200;ttyUSB0"
 KERNEL_SERIAL_CONSOLE ??= "console=ttyS0,115200n8"

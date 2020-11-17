@@ -31,11 +31,9 @@ MACHINE_FEATURES += " \
     ima \
 "
 
-MACHINE_EXTRA_RRECOMMENDS += " \
-    kernel-modules \
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
     grub \
-    parted \
-    util-linux-blkid \
+    kernel-modules \
 "
 
 # QEMU does not support some of the enhanced instructions available

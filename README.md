@@ -10,10 +10,8 @@ Yocto BSP layer for PC Engines hardware
 
 # Building
 
-Make sure to adjust `~/ssh-keys` according to your configuration:
-
 ```
-SHELL=bash kas-docker --ssh-dir ~/ssh-keys build meta-pcengines/kas-docker.yml
+SHELL=/bin/bash kas-docker build meta-pcengines/kas-docker.yml
 ```
 
 Check a device node of the drive to be flashed:
@@ -25,8 +23,18 @@ sudo fdisk -l
 Change directory to `<build-directory>/tmp/deploy/images/pcengines-apu2`. Find
 desired image and flash the drive:
 
+> Replace the `/dev/sdx` with the proper device path
+
 ```
-sudo dd if=xen-dom0-image-pcengines-apu2.hddimg of=/dev/<drive_dir>
+sudo bmaptool copy --bmap docker-image-minimal-pcengines-apu2.wic.bmap docker-image-minimal-pcengines-apu2.wic.gz /dev/sdx
+```
+
+> The `bmaptool` can flash images much faster than the `dd`
+
+or if `bmap-tools` are not available in your system:
+
+```
+gzip -cdk docker-image-minimal-pcengines-apu2.wic.gz | sudo dd of=/dev/sdx
 ```
 
 # Bootup log

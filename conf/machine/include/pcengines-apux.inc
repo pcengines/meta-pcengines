@@ -31,11 +31,9 @@ MACHINE_FEATURES += " \
     ima \
 "
 
-MACHINE_EXTRA_RRECOMMENDS += " \
-    kernel-modules \
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
     grub \
-    parted \
-    util-linux-blkid \
+    kernel-modules \
 "
 
 # QEMU does not support some of the enhanced instructions available
@@ -49,7 +47,7 @@ MACHINE_FEATURES_remove = "qemu-usermode"
 APPEND_ADDITIONAL ??= ""
 APPEND += "${APPEND_ADDITIONAL}"
 
-IMAGE_FSTYPES += "ext4"
+IMAGE_FSTYPES += "ext4 wic.gz wic.bmap"
 
 IMAGE_OVERHEAD_FACTOR = "1.1"
 
@@ -64,3 +62,5 @@ KERNEL_MODULE_AUTOLOAD_pce-xen += " \
     xen-pciback \
     xen-blkback \
 "
+
+WKS_FILES ?= "directdisk-grub-legacy.wks"

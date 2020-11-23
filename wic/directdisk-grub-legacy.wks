@@ -1,0 +1,3 @@
+part /boot  --source bootimg-grub-legacy --label msdos --active --align 1024 --use-uuid --size 32M
+part /      --source rootfs --fstype=ext4 --align 1024 --overhead-factor 1.5
+bootloader  --ptable msdos --timeout=5 --append="rootfstype=ext4 console=ttyS0,115200 earlyprintk=serial,ttyS0,115200"

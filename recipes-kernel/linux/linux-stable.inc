@@ -12,6 +12,7 @@ SRC_URI = " \
     git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git;branch=${KBRANCH};tag=${LINUX_TAG} \
     git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-5.4;destsuffix=kernel-meta \
     file://defconfig \
+    file://thermal.cfg \
     "
 
 SRCREV_meta = "aafb8f095e97013d6e55b09ed150369cbe0c6476"

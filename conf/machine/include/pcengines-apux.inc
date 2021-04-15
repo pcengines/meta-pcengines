@@ -32,7 +32,6 @@ MACHINE_FEATURES += " \
 "
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
-    grub \
     kernel-modules \
 "
 
@@ -64,3 +63,5 @@ KERNEL_MODULE_AUTOLOAD_pce-xen += " \
 "
 
 WKS_FILES ?= "directdisk-grub-legacy.wks"
+
+QB_DEFAULT_FSTYPE = "${IMAGE_FSTYPES}"

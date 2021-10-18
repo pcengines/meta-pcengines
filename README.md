@@ -32,3 +32,8 @@ sudo dd if=xen-dom0-image-pcengines-apu2.hddimg of=/dev/<drive_dir>
 # Bootup log
 
 The bootup log [example](bootup.log).
+
+# Issues
+
+If you want to create an issue, [here](https://github.com/pcengines/apu2-documentation/issues)
+is the right place for that.

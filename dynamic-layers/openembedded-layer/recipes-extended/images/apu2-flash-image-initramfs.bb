@@ -1,6 +1,6 @@
 require recipes-core/images/core-image-minimal.bb
 
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
   flashrom \
   gnupg \
   wget \
@@ -10,4 +10,4 @@ IMAGE_INSTALL_append = " \
   "
 
 IMAGE_FSTYPES += "cpio.gz"
-IMAGE_FEATURES_append = " ssh-server-openssh"
+IMAGE_FEATURES:append = " ssh-server-openssh"

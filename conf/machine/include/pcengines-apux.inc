@@ -46,7 +46,7 @@ MACHINE_EXTRA_RRECOMMENDS += " \
 # NOTE: > Executing update_gio_module_cache intercept ...
 # NOTE: Exit code 132. Output:
 # Illegal instruction (core dumped)
-MACHINE_FEATURES_remove = "qemu-usermode"
+MACHINE_FEATURES:remove = "qemu-usermode"
 
 APPEND_ADDITIONAL ??= ""
 APPEND += "${APPEND_ADDITIONAL}"

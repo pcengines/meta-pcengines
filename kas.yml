@@ -6,7 +6,7 @@ repos:
 
   poky:
     url: https://git.yoctoproject.org/git/poky
-    refspec: 0fc9d32ae11ebb53aa33342f50887c1e692a1f32
+    refspec: 5d822b31316663c838c5864ab68b28fb3ca41351
     layers:
       meta:
       meta-poky:
@@ -14,7 +14,7 @@ repos:
 
   meta-openembedded:
     url: http://git.openembedded.org/meta-openembedded
-    refspec: e413c1ef621688e69bb7830bb3151ed23b30b73e
+    refspec: a88cb922f91fda95e8a584cee3092083d5ad3e98
     layers:
       meta-oe:
       meta-networking:
@@ -23,17 +23,17 @@ repos:
 
   meta-virtualization:
     url: https://git.yoctoproject.org/git/meta-virtualization
-    refspec: 5c2de3daedd3f65171b9debf938683ce6e7746ea
+    refspec: 2d8b3cba8ff27c9ec2187a52b6a551fe1dcfaa07
 
   meta-security:
     url: https://git.yoctoproject.org/git/meta-security
-    refspec: c74cc97641fd93e0e7a4383255e9a0ab3deaf9d7
+    refspec: 06c240c3c235fa06fe724e278d53463ac67cc26b
     layers:
       meta-tpm:
 
   meta-selinux:
     url: https://git.yoctoproject.org/git/meta-selinux
-    refspec: 7af62c91d7d00a260cf28e7908955539304d100d
+    refspec: a401f4b2816a0b41ce8d9351542658c721935bcd
 
 bblayers_conf_header:
   standard: |
@@ -46,7 +46,7 @@ local_conf_header:
     CONF_VERSION = "2"
     PACKAGE_CLASSES = "package_rpm"
     SDKMACHINE = "x86_64"
-    USER_CLASSES = "buildstats image-mklibs image-prelink"
+    USER_CLASSES = "buildstats"
     PATCHRESOLVE = "noop"
   debug-tweaks: |
     EXTRA_IMAGE_FEATURES = "debug-tweaks"

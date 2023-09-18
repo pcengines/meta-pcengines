@@ -1,7 +1,7 @@
 DEFAULTTUNE ?= "dbft3b"
 
 require conf/machine/include/x86/arch-x86.inc
-require conf/machine/include/x86-base.inc
+require conf/machine/include/x86/x86-base.inc
 
 # AMD DB-FT3b 64bit (SteppeEagle)
 TUNEVALID[dbft3b] = "Enable AMD DB-FT3b (64 bit) specific processor optimizations"

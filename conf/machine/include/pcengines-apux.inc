@@ -19,7 +19,7 @@ XSERVER ?= "${XSERVER_X86_BASE} \
            "
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-stable"
-PREFERRED_VERSION_linux-yocto = "5.4%"
+PREFERRED_VERSION_linux-yocto = "5.15%"
 
 MACHINE_FEATURES += " \
     rtc \

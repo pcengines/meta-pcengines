@@ -42,7 +42,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
 # NOTE: > Executing update_gio_module_cache intercept ...
 # NOTE: Exit code 132. Output:
 # Illegal instruction (core dumped)
-MACHINE_FEATURES_remove = "qemu-usermode"
+MACHINE_FEATURES:remove = "qemu-usermode"
 
 APPEND_ADDITIONAL ??= ""
 APPEND += "${APPEND_ADDITIONAL}"
@@ -53,7 +53,7 @@ IMAGE_OVERHEAD_FACTOR = "1.1"
 
 KERNEL_IMAGETYPE = "bzImage"
 
-KERNEL_MODULE_AUTOLOAD_pce-xen += " \
+KERNEL_MODULE_AUTOLOAD:pce-xen += " \
     xen-netback \
     xen_wdt \
     xen-gntdev \

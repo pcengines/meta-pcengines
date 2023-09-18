@@ -1,6 +1,6 @@
 require recipes-extended/images/xen-image-minimal.bb
 
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
   seabios \
   "
 

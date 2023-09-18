@@ -25,6 +25,6 @@ KCONFIG_MODE="--alldefconfig"
 # The oldnoconfig has been replaced with the olddefconfig command
 # see: https://patchwork.kernel.org/patch/10172375/
 # KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
-# FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo"
+# FILES:${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo"
 
-COMPATIBLE_MACHINE_pcengines-apu2 = "pcengines-apu2"
+COMPATIBLE_MACHINE:pcengines-apu2 = "pcengines-apu2"

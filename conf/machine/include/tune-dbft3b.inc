@@ -10,7 +10,7 @@ TUNE_CCARGS .= "${@bb.utils.contains("TUNE_FEATURES", "dbft3b", " -march=btver2"
 
 # Extra tune selections
 AVAILTUNES += "dbft3b"
-TUNE_FEATURES_tune-dbft3b = "m64 dbft3b"
-BASE_LIB_tune-dbft3b = "lib64"
-TUNE_PKGARCH_tune-dbft3b = "dbft3b"
-PACKAGE_EXTRA_ARCHS_tune-dbft3b = "${TUNE_PKGARCH_tune-dbft3b}"
+TUNE_FEATURES:tune-dbft3b = "m64 dbft3b"
+BASE_LIB:tune-dbft3b = "lib64"
+TUNE_PKGARCH:tune-dbft3b = "dbft3b"
+PACKAGE_EXTRA_ARCHS:tune-dbft3b = "${TUNE_PKGARCH:tune-dbft3b}"

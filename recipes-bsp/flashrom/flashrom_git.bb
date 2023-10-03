@@ -3,7 +3,7 @@ DESCRIPTION = "flashrom is a utility for identifying, reading, writing, verifyin
 LICENSE = "CLOSED"
 HOMEPAGE = "https://github.com/pcengines/flashrom"
 
-SRC_URI = "git://github.com/pcengines/flashrom.git;branch=apu_support "
+SRC_URI = "git://github.com/pcengines/flashrom.git;branch=apu_support;protocol=https"
 SRCREV = "092b1c28bf31dab170d2fc0dc09b6bee3fa68bfa"
 
 DEPENDS = "pciutils libusb libusb-compat"

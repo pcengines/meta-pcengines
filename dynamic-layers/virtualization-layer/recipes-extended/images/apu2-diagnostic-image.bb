@@ -1,6 +1,6 @@
 require docker-image-minimal.bb
 
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     flashrom \
     edac-utils \
     tpm2-tools \

@@ -1,7 +1,7 @@
 require conf/distro/poky.conf
 
 DISTRO_NAME = "Reference Yocto distro for PC Engines hardware"
-DISTRO_VERSION = "0.1"
+DISTRO_VERSION = "0.2"
 SDK_VENDOR = "-pcesdk"
 TARGET_VENDOR = "-pce"
 
@@ -18,6 +18,7 @@ DISTRO_FEATURES = " \
     usbgadget \
     usbhost \
     virtualization \
+    seccomp \
 "
 
 # disable sysvinit

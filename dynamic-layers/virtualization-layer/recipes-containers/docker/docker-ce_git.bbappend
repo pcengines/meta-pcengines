@@ -1,1 +1,1 @@
-RRECOMMENDS_${PN} += " kernel-module-xt-addrtype"
+RRECOMMENDS:${PN} += " kernel-module-xt-addrtype"
